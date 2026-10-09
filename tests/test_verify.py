@@ -6,6 +6,7 @@ from fastapi.testclient import TestClient
 
 from server import messages
 from server.app import _hits, app
+from server.notify import format_notice
 from server.exchanges import (
     check_binance,
     check_binance_file,
@@ -187,7 +188,82 @@ def test_admin_list_requires_token(tmp_path, monkeypatch):
     assert client.get("/api/applications").status_code == 401
     listed = client.get("/api/applications", headers={"Authorization": "Bearer review-token"})
     assert listed.status_code == 200
-    assert listed.json()["applications"][0]["uid"] == "10086001"
+    body = listed.json()
+    assert body["total"] == 1
+    assert body["applications"][0]["uid"] == "10086001"
+    assert body["applications"][0]["qq"] is None
+    filtered = client.get("/api/applications", headers={"Authorization": "Bearer review-token"}, params={"exchange": "OKX", "status": "verified"})
+    assert filtered.json()["total"] == 1
+    missed = client.get("/api/applications", headers={"Authorization": "Bearer review-token"}, params={"exchange": "Gate"})
+    assert missed.json()["total"] == 0
+
+
+def test_notice_includes_exchange_result_and_form():
+    text = format_notice(
+        {
+            "id": "CA-1",
+            "exchange": "Gate",
+            "status": "verified",
+            "uid": "10086001",
+            "qq": "10001",
+            "telegram": "@alpha_user",
+            "source": "YouTube",
+            "source_other": "<campaign>",
+            "submitted_at": "2026-10-09T02:02:00+00:00",
+        }
+    )
+    assert "交易所：Gate" in text
+    assert "自动验证：<b>通过</b>" in text
+    assert "UID：10086001" in text
+    assert "QQ：10001" in text
+    assert "Telegram：@alpha_user" in text
+    assert "QQ：10001" in text
+    assert "来源：YouTube" in text
+    assert "其他来源：&lt;campaign&gt;" in text
+    assert "提交时间：2026-10-09 10:02" in text
+
+
+def test_notice_omits_the_social_that_was_not_filled():
+    text = format_notice(
+        {
+            "id": "CA-2",
+            "exchange": "OKX",
+            "status": "rejected",
+            "uid": "20000002",
+            "qq": "",
+            "telegram": "@alpha_user",
+            "source": "",
+            "submitted_at": "2026-10-09T02:02:00+00:00",
+        }
+    )
+    assert "QQ：" not in text
+    assert "Telegram：@alpha_user" in text
+    assert "自动验证：<b>未通过</b>" in text
+
+
+def test_verify_pushes_notice_to_telegram(tmp_path, monkeypatch):
+    monkeypatch.setenv("DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("MOCK_VERIFY", "1")
+    monkeypatch.setenv("MOCK_UIDS", "10086001")
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "token")
+    monkeypatch.setenv("TELEGRAM_CHAT_ID", "-1001")
+    sent = []
+
+    async def fake(application):
+        sent.append(application)
+        return True
+
+    monkeypatch.setattr("server.app.notify_group", fake)
+    _hits.clear()
+    response = TestClient(app).post(
+        "/api/verify",
+        json={"exchange": "OKX", "uid": "10086001", "qq": "10001", "telegram": "@alpha_user", "source": "X"},
+    )
+    assert response.status_code == 200
+    assert sent[0]["exchange"] == "OKX"
+    assert sent[0]["status"] == "verified"
+    assert sent[0]["uid"] == "10086001"
+    assert sent[0]["qq"] == "10001"
 
 
 def test_page_contains_server_messages():

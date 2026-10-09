@@ -10,6 +10,7 @@ from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel
 
 from server.exchanges import check_exchange
+from server.notify import notify_group
 from server.messages import (
     APP_ID_LABEL,
     BAD_SOCIAL,
@@ -22,7 +23,7 @@ from server.messages import (
     UNSUPPORTED,
     VERIFIED,
 )
-from server.store import list_applications, reuse_recent, save_application
+from server.store import query_applications, reuse_recent, save_application
 
 ROOT = Path(__file__).resolve().parent.parent
 EXCHANGES = {"gate": "Gate", "okx": "OKX", "binance": "Binance"}
@@ -102,16 +103,25 @@ def health():
             "okx": bool(os.getenv("OKX_API_KEY") and os.getenv("OKX_API_SECRET") and os.getenv("OKX_API_PASSPHRASE")),
             "binance": bool(os.getenv("BINANCE_API_KEY") and os.getenv("BINANCE_API_SECRET")),
         },
+        "telegram": bool(os.getenv("TELEGRAM_BOT_TOKEN") and os.getenv("TELEGRAM_CHAT_ID")),
     }
 
 
 @app.get("/api/applications")
-def applications(authorization: str | None = Header(default=None)):
+def applications(
+    authorization: str | None = Header(default=None),
+    exchange: str = "",
+    status: str = "",
+    uid: str = "",
+    q: str = "",
+    limit: int = 50,
+    offset: int = 0,
+):
     expected = os.getenv("ADMIN_TOKEN", "").strip()
     provided = (authorization or "").removeprefix("Bearer ").strip()
     if not expected or not provided or not hmac.compare_digest(provided.encode(), expected.encode()):
         return JSONResponse({"message": "unauthorized"}, status_code=401)
-    return {"applications": list_applications()}
+    return query_applications(exchange=exchange, status=status, uid=uid, q=q, limit=limit, offset=offset)
 
 
 @app.post("/api/verify")
@@ -136,8 +146,20 @@ async def verify(body: VerifyIn, request: Request):
         return JSONResponse({"message": BAD_SOCIAL}, status_code=400)
 
     contact = {"qq": qq, "telegram": telegram, "source": source, "source_other": source_other}
+    submitted_at = datetime.now(timezone.utc).isoformat()
     cached = reuse_recent(exchange, uid, contact)
     if cached:
+        await notify_group(
+            {
+                "id": cached["id"],
+                "exchange": exchange,
+                "uid": uid,
+                "status": cached["status"],
+                "submitted_at": submitted_at,
+                "repeat": True,
+                **contact,
+            }
+        )
         return _payload(cached["id"], cached["status"], _message_for(cached["status"]))
 
     try:
@@ -157,7 +179,18 @@ async def verify(body: VerifyIn, request: Request):
             "source_other": source_other,
             "status": result.status,
             "relation": result.relation,
-            "created_at": datetime.now(timezone.utc).isoformat(),
+            "created_at": submitted_at,
+        }
+    )
+    await notify_group(
+        {
+            "id": application_id,
+            "exchange": exchange,
+            "uid": uid,
+            "status": result.status,
+            "submitted_at": submitted_at,
+            "repeat": False,
+            **contact,
         }
     )
     return _payload(application_id, result.status, result.message)

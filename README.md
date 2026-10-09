@@ -24,10 +24,28 @@ docker compose up -d --build
 
 页面在 `http://服务器:8080/`。
 
-查看申请：
+每次提交成功后，服务把申请推到 Telegram 群。把机器人拉进群，再填写 `TELEGRAM_BOT_TOKEN` 和 `TELEGRAM_CHAT_ID`。群消息格式：
+
+```text
+CRYPTO ALPHA · 新会员申请
+
+申请编号：CA-XXXX
+交易所：Gate
+自动验证：通过
+
+UID：12345678
+Telegram：@username
+来源：YouTube
+提交时间：2026-10-09 10:02
+```
+
+QQ 和 Telegram 只推用户实际填写的那一项，没填的行不会出现。自动验证只有三种：通过、未通过、待人工核对。10 分钟内同一交易所和 UID 再提交，会再推一条，并注明沿用上次核对结果。
+
+申请保存在 SQLite：`data/applications.sqlite3`。Docker 会把 `./data` 挂出来，后面做后台可以直接查。
 
 ```bash
-curl -H "Authorization: Bearer $ADMIN_TOKEN" http://127.0.0.1:8080/api/applications
+curl -H "Authorization: Bearer $ADMIN_TOKEN" \
+  "http://127.0.0.1:8080/api/applications?exchange=Gate&status=verified&q=10086"
 ```
 
 币安名单每行一个 UID，也兼容 CSV 的第一列：
