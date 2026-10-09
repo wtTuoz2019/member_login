@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title><span data-qai18n-v8fix="v8fix0">CRYPTO ALPHA · Review Console</span></title><style>*{box-sizing:border-box}body{margin:0;background:#05090b;color:#edf7f2;font-family:Inter,system-ui,sans-serif}body:before{content:'';position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(72,219,164,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(72,219,164,.025) 1px,transparent 1px);background-size:56px 56px}.wrap{width:min(1100px,calc(100% - 32px));margin:auto}.nav{height:70px;border-bottom:1px solid #193029;display:flex;align-items:center;justify-content:space-between}.brand{font-size:12px;font-weight:800;letter-spacing:.1em}.brand i{display:inline-grid;place-items:center;width:28px;height:28px;border:1px solid #48dba4;border-radius:50%;color:#48dba4;font-style:normal;margin-right:10px}.meta,.eyebrow{font:700 8px ui-monospace,monospace;letter-spacing:.14em;color:#48dba4}.hero{padding:65px 0 28px}.hero h1{font-size:clamp(38px,6vw,70px);line-height:1;letter-spacing:-.055em;margin:15px 0}.hero p{max-width:680px;color:#83958d;font-size:12px;line-height:1.8}.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;padding:22px 0 70px}.panel{background:#08100ed9;border:1px solid #193029;border-radius:18px;padding:25px;position:relative}.panel:before{content:'';position:absolute;top:-1px;left:25px;width:70px;height:1px;background:#48dba4}.panel h2{margin:6px 0 24px;font-size:18px}.field{margin-bottom:17px}.field label{display:flex;justify-content:space-between;margin-bottom:8px;font-size:10px;color:#b6c6bf}.req{color:#48dba4}input,select,textarea{width:100%;min-height:48px;background:#050b0a;border:1px solid #193029;border-radius:9px;color:#edf7f2;padding:0 13px;font:500 13px inherit;outline:none}textarea{padding-top:12px;min-height:85px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:#48dba4}.social{display:grid;grid-template-columns:1fr 1fr;gap:10px}.hint,.muted{color:#83958d;font-size:9px;line-height:1.65}.notice{border:1px solid #173a2f;background:#07140f;padding:14px;border-radius:10px;color:#9db0a8;font-size:9px;line-height:1.7}.notice b{color:#edf7f2}.check{display:flex;gap:9px;margin:17px 0;color:#83958d;font-size:9px;line-height:1.6}.check input{width:14px;height:14px;min-height:14px;accent-color:#48dba4}.primary{width:100%;height:50px;border:0;border-radius:9px;background:#48dba4;color:#04110c;font-weight:800;cursor:pointer}.step{display:grid;grid-template-columns:28px 1fr;gap:12px;padding:16px 0;border-bottom:1px solid #193029}.step i{display:grid;place-items:center;width:27px;height:27px;border:1px solid #193029;border-radius:50%;color:#48dba4;font:700 8px monospace}.step b{font-size:11px}.step p{margin:5px 0 0;color:#83958d;font-size:9px;line-height:1.6}.status{display:none;margin-top:14px;padding:14px;border:1px solid #28654f;border-radius:10px;font-size:10px;line-height:1.6}.status.on{display:block}footer{padding:22px 0 35px;border-top:1px solid #193029;color:#83958d;font:600 8px monospace}@media(max-width:760px){.grid{grid-template-columns:1fr}.social{grid-template-columns:1fr}.meta{display:none}.hero{padding-top:45px}} .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:22px 0}.stat{border:1px solid #193029;border-radius:11px;padding:15px}.stat small{color:#83958d;font:700 8px monospace}.stat b{display:block;font-size:24px;margin-top:6px}.tools{display:flex;gap:9px;margin:18px 0;flex-wrap:wrap}.tools input,.tools select{width:auto;min-width:180px}.app{display:grid;grid-template-columns:1.3fr .9fr .7fr .5fr;gap:14px;align-items:center;border:1px solid #193029;border-radius:12px;padding:17px;margin-bottom:8px;background:#08100ed9}.mono{font:600 10px monospace}.pill{display:inline-block;border:1px solid #193029;border-radius:99px;padding:5px 7px;font:700 7px monospace}.pending{color:#e9a85d}.approved{color:#48dba4}.rejected{color:#ef7777}.more_info{color:#55cfe2}.mini{border:1px solid #193029;border-radius:7px;background:transparent;color:#edf7f2;padding:8px 9px;font:700 8px monospace;cursor:pointer}dialog{width:min(600px,calc(100% - 28px));background:#08100e;color:#edf7f2;border:1px solid #193029;border-radius:16px;padding:23px}dialog::backdrop{background:#000b}.actions{display:flex;gap:8px;margin-top:16px}.actions button{flex:1}.empty{text-align:center;padding:45px;border:1px dashed #193029;border-radius:12px;color:#83958d}@media(max-width:800px){.stats{grid-template-columns:1fr 1fr}.app{grid-template-columns:1fr}.tools input,.tools select{width:100%}}
+
+/* ===== UNIFIED CRYPTO ALPHA BRAND HEADER ===== */
+.nav{
+  height:76px !important;
+  min-height:76px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+}
+.brand{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:12px !important;
+  min-height:40px !important;
+  margin:0 !important;
+  padding:0 !important;
+  color:var(--text,#edf7f2) !important;
+  font-size:12px !important;
+  font-weight:800 !important;
+  line-height:1 !important;
+  letter-spacing:.105em !important;
+  white-space:nowrap !important;
+}
+.brand .brand-logo{
+  position:relative !important;
+  display:block !important;
+  width:36px !important;
+  height:36px !important;
+  min-width:36px !important;
+  flex:0 0 36px !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:1px solid rgba(72,219,164,.42) !important;
+  border-radius:11px !important;
+  overflow:hidden !important;
+  background:#62f56b !important;
+  box-shadow:0 0 0 1px rgba(255,255,255,.025),0 0 28px rgba(72,219,164,.08) !important;
+  vertical-align:middle !important;
+}
+.brand .brand-logo:after{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  border-radius:inherit !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.055) !important;
+  pointer-events:none !important;
+}
+.brand .brand-logo img{
+  position:absolute !important;
+  inset:0 !important;
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+  object-fit:cover !important;
+  object-position:50% 48% !important;
+  transform:none !important;
+}
+.navmeta,.nav-meta{
+  display:flex !important;
+  align-items:center !important;
+  min-height:36px !important;
+  margin:0 !important;
+  line-height:1 !important;
+}
+@media(max-width:520px){
+  .nav{height:68px !important;min-height:68px !important}
+  .brand{gap:10px !important;font-size:11px !important}
+  .brand .brand-logo{width:33px !important;height:33px !important;min-width:33px !important;flex-basis:33px !important;border-radius:10px !important}
+}
+
+
+.lang-select{height:34px!important;min-height:34px!important;width:auto!important;min-width:82px!important;margin-left:14px!important;padding:0 28px 0 10px!important;border:1px solid var(--line,#193029)!important;border-radius:8px!important;background:#07100e!important;color:var(--muted,#81938b)!important;font:700 8px ui-monospace,monospace!important;letter-spacing:.05em!important;outline:none!important}
+.nav-tools{display:flex;align-items:center;gap:10px}.nav-tools .navmeta,.nav-tools .nav-meta{margin:0!important}
+@media(max-width:520px){.nav-tools .navmeta,.nav-tools .nav-meta{display:none!important}.lang-select{min-width:76px!important;margin-left:0!important}}
+
+/* ===== COMPACT MOBILE V4 ===== */
+@media(max-width:760px){
+  .wrap,.shell{width:calc(100% - 22px)!important}
+  .nav{height:60px!important;min-height:60px!important}
+  .brand{gap:8px!important;font-size:10px!important;letter-spacing:.075em!important}
+  .brand .brand-logo{width:30px!important;height:30px!important;min-width:30px!important;flex-basis:30px!important;border-radius:9px!important}
+  .lang-select{height:30px!important;min-height:30px!important;min-width:68px!important;padding:0 24px 0 8px!important;font-size:7px!important}
+  .hero{padding:34px 0 16px!important}
+  .hero h1,.adminhero h1{margin:10px 0 10px!important;font-size:clamp(32px,10vw,46px)!important;line-height:.98!important}
+  .hero p{font-size:10px!important;line-height:1.65!important}
+  .eyebrow{font-size:7px!important}
+  .grid{gap:11px!important;padding:12px 0 42px!important}
+  .panel{padding:17px!important;border-radius:14px!important}
+  .panel:before{left:17px!important;width:54px!important}
+  .panel h2{margin:5px 0 17px!important;font-size:15px!important}
+  .panel-title{margin-bottom:17px!important}
+  .field{margin-bottom:13px!important}
+  .field label{margin-bottom:6px!important;font-size:9px!important}
+  input,select,textarea{min-height:42px!important;height:42px!important;padding-left:11px!important;padding-right:11px!important;border-radius:8px!important;font-size:12px!important}
+  textarea{height:auto!important;min-height:70px!important;padding-top:10px!important}
+  .social{gap:7px!important}
+  .hint,.muted{font-size:8px!important;line-height:1.5!important}
+  .notice{padding:11px!important;font-size:8px!important;line-height:1.55!important}
+  .check{margin:13px 0!important;font-size:8px!important;line-height:1.5!important}
+  .primary{height:44px!important;min-height:44px!important;font-size:11px!important}
+  .referral-tags{gap:6px!important}
+  .referral-tag{min-height:30px!important;padding:0 10px!important;font-size:8px!important}
+  .step{grid-template-columns:24px 1fr!important;gap:9px!important;padding:12px 0!important}
+  .step i{width:23px!important;height:23px!important;font-size:7px!important}
+  .step b{font-size:10px!important}.step p{font-size:8px!important;margin-top:3px!important}
+  footer{padding:17px 0 24px!important;font-size:7px!important}
+  .stats{gap:7px!important;margin:14px 0 17px!important}
+  .stat{padding:11px!important}.stat b{font-size:19px!important;margin-top:4px!important}.stat small{font-size:7px!important}
+  .tools{gap:7px!important;margin:12px 0!important}
+  .tools input,.tools select{width:100%!important;min-width:0!important}
+  .app{gap:9px!important;padding:13px!important;border-radius:10px!important;margin-bottom:7px!important}
+  .mono{font-size:8px!important}.pill{padding:4px 6px!important;font-size:6px!important}
+  .mini{padding:7px 8px!important;font-size:7px!important}
+  dialog{padding:17px!important;border-radius:14px!important}
+}
+@media(max-width:520px){
+  .layout{padding:31px 0 42px!important;gap:28px!important}
+  .intro h1{margin:10px 0 13px!important;font-size:clamp(38px,12vw,52px)!important}
+  .intro>p{font-size:10px!important;line-height:1.65!important}
+  .signal{height:92px!important;margin-top:25px!important}
+  .signal-meta{bottom:7px!important;gap:10px!important;font-size:6px!important}
+  .login{padding:17px!important;border-radius:14px!important}
+  .login:before{left:17px!important;width:54px!important}
+  .login-head{margin-bottom:19px!important}
+  .login-head h2{font-size:17px!important}
+  .login-head small,.secure{font-size:7px!important}
+  .row{margin:2px 0 15px!important}
+  .divider{margin:16px 0!important}
+  .alt{gap:7px!important}.alt button{height:39px!important}
+  .notice{margin-top:16px!important;padding-top:13px!important}
+  .access{margin-top:14px!important;font-size:8px!important}
+}
+@media(max-width:380px){
+  .wrap,.shell{width:calc(100% - 16px)!important}
+  .brand{font-size:9px!important}.brand .brand-logo{width:28px!important;height:28px!important;min-width:28px!important;flex-basis:28px!important}
+  .lang-select{min-width:62px!important}
+  .panel,.login{padding:14px!important}
+  .hero h1,.adminhero h1{font-size:30px!important}
+  .referral-tag{padding:0 8px!important}
+}
+
+
+.uid-intel{margin:0 0 24px;padding:22px;border:1px solid var(--line);border-radius:18px;background:rgba(8,15,14,.76);position:relative;overflow:hidden}
+.uid-intel:before{content:"";position:absolute;top:-1px;left:22px;width:72px;height:1px;background:var(--cyan)}
+.uid-intel-head{display:flex;justify-content:space-between;gap:18px;margin-bottom:18px}.uid-intel-head h2{margin:5px 0 6px;font-size:18px}.uid-intel-head p{max-width:650px}
+.api-state{display:flex;align-items:center;gap:6px;height:24px;padding:0 8px;border:1px solid var(--line);border-radius:99px;color:var(--muted);font:700 7px ui-monospace,monospace;white-space:nowrap}.api-state i{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(72,219,164,.55)}
+.uid-lookup{display:grid;grid-template-columns:185px minmax(0,1fr) 145px;gap:10px;align-items:end}.uid-lookup label{display:block;margin-bottom:6px;color:#b8c8c1;font-size:9px}.uid-lookup select,.uid-lookup input{width:100%;height:44px;min-height:44px}.lookup-btn{height:44px;min-height:44px}
+.uid-result{margin-top:15px;border-top:1px solid var(--line)}.uid-empty{min-height:118px;display:flex;align-items:center;justify-content:center;gap:11px;color:var(--muted)}.uid-empty b{display:block;color:var(--text);font-size:11px;margin-bottom:3px}.uid-empty p{margin:0;font-size:9px}.uid-cross{width:31px;height:31px;border:1px solid var(--line);border-radius:9px;position:relative}.uid-cross:before,.uid-cross:after{content:"";position:absolute;background:rgba(72,219,164,.35)}.uid-cross:before{left:50%;top:5px;width:1px;height:19px}.uid-cross:after{top:50%;left:5px;height:1px;width:19px}
+.uid-result-card{display:grid;grid-template-columns:1fr 1fr;gap:13px;padding-top:15px}.uid-profile,.uid-linkage{padding:15px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.012)}.uid-section-kicker{margin-bottom:9px;color:var(--muted);font:700 7px ui-monospace,monospace;letter-spacing:.09em}.uid-hero-row{display:flex;justify-content:space-between;gap:10px;margin-bottom:12px}.uid-name{font-size:15px;font-weight:750}.uid-sub{margin-top:4px;color:var(--muted);font:600 8px ui-monospace,monospace}.uid-status{padding:5px 7px;border:1px solid rgba(72,219,164,.22);border-radius:99px;color:var(--green);font:700 7px ui-monospace,monospace;height:max-content}
+.uid-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:11px}.uid-metric{padding:9px;border:1px solid var(--line);border-radius:8px}.uid-metric span{display:block;color:var(--muted);font-size:7px;margin-bottom:4px}.uid-metric b{font:700 10px ui-monospace,monospace}
+.uid-table{display:grid;grid-template-columns:1fr auto;border-top:1px solid var(--line)}.uid-table div{padding:8px 0;border-bottom:1px solid var(--line);font-size:8px;color:var(--muted)}.uid-table div:nth-child(even){color:var(--text);font:700 8px ui-monospace,monospace;text-align:right}
+.uid-linkage h3{font-size:12px;margin:0 0 11px}.link-badge{display:inline-flex;padding:5px 7px;margin:0 4px 4px 0;border:1px solid var(--line);border-radius:7px;color:var(--muted);font:700 7px ui-monospace,monospace}.link-badge.ok{color:var(--green);border-color:rgba(72,219,164,.22)}.link-badge.warn{color:var(--orange);border-color:rgba(233,168,93,.2)}
+.uid-audit{margin-top:11px;padding:10px;border-left:2px solid var(--cyan);background:rgba(85,207,226,.025);color:var(--muted);font-size:8px;line-height:1.55}.uid-foot{display:flex;justify-content:space-between;margin-top:11px;color:var(--muted);font:600 7px ui-monospace,monospace}.uid-demo-note{color:var(--orange)}
+body.light-theme .uid-intel{background:linear-gradient(145deg,rgba(255,255,255,.97),rgba(246,250,248,.88));border-color:rgba(7,135,95,.14)}body.light-theme .uid-profile,body.light-theme .uid-linkage{background:rgba(7,135,95,.018)}
+@media(max-width:800px){.uid-intel{padding:17px}.uid-intel-head{display:block}.api-state{margin-top:10px;width:max-content}.uid-lookup{grid-template-columns:1fr 1fr}.lookup-btn{grid-column:1/-1}.uid-result-card{grid-template-columns:1fr}}
+@media(max-width:520px){.uid-intel{padding:14px;border-radius:14px}.uid-lookup{grid-template-columns:1fr}.lookup-btn{grid-column:auto}.uid-metrics{grid-template-columns:1fr 1fr}.uid-foot{display:block;line-height:1.5}}
+
+/* ===== UID linkage readability pass ===== */
+.uid-linkage{
+  padding:18px!important;
+}
+.uid-linkage h3{
+  font-size:16px!important;
+  line-height:1.3!important;
+  margin:0 0 14px!important;
+}
+.uid-linkage .uid-section-kicker{
+  font-size:8px!important;
+  margin-bottom:10px!important;
+}
+.uid-linkage .link-badge{
+  padding:7px 10px!important;
+  margin:0 6px 6px 0!important;
+  font-size:9px!important;
+  line-height:1.2!important;
+}
+.uid-linkage .uid-table{
+  margin-top:12px!important;
+}
+.uid-linkage .uid-table div{
+  padding:10px 0!important;
+  font-size:10px!important;
+  line-height:1.35!important;
+}
+.uid-linkage .uid-table div:nth-child(even){
+  font-size:10px!important;
+  font-weight:700!important;
+}
+.uid-linkage .uid-audit{
+  margin-top:13px!important;
+  padding:11px 12px!important;
+  font-size:9px!important;
+  line-height:1.6!important;
+}
+@media(max-width:520px){
+  .uid-linkage{padding:14px!important}
+  .uid-linkage h3{font-size:15px!important}
+  .uid-linkage .link-badge{font-size:9px!important;padding:7px 9px!important}
+  .uid-linkage .uid-table div{font-size:9px!important}
+  .uid-linkage .uid-table div:nth-child(even){font-size:9px!important}
+}
+
+.admin-nav-actions{display:flex;align-items:center;gap:12px}
+.admin-signout{
+  height:31px;padding:0 10px;border:1px solid var(--line);border-radius:7px;
+  background:transparent;color:var(--muted);font:700 7px ui-monospace,monospace;
+  letter-spacing:.06em;cursor:pointer;transition:.16s ease
+}
+.admin-signout:hover{color:var(--red,#ef7777);border-color:rgba(239,119,119,.35)}
+@media(max-width:520px){.admin-nav-actions{gap:7px}.admin-signout{height:29px;padding:0 8px;font-size:6.5px}.admin-nav-actions .meta{display:none}}
+
+.member-console-link{
+  color:var(--muted);text-decoration:none;
+  font:700 7px ui-monospace,monospace;letter-spacing:.06em
+}
+.member-console-link:hover{color:var(--green)}
+@media(max-width:520px){.member-console-link{display:none}}
+
+.member-nav-actions{display:flex;align-items:center;gap:10px}
+.member-account{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font:700 7px ui-monospace,monospace;letter-spacing:.05em}
+.member-signout{height:31px;padding:0 10px;border:1px solid var(--line);border-radius:7px;background:transparent;color:var(--muted);font:700 7px ui-monospace,monospace;letter-spacing:.06em;cursor:pointer;transition:.16s ease}
+.member-signout:hover{color:var(--red,#ef7777);border-color:rgba(239,119,119,.35)}
+@media(max-width:520px){.member-account{max-width:105px}.member-signout{height:29px;padding:0 8px;font-size:6.5px}}
+</style></head><body>
+<script id="member-auth-guard">
+(function(){
+  try{
+    if(localStorage.getItem('ca_member_session')!=='active'){
+      window.location.href='crypto-alpha-login.html?reason=login';
+    }
+  }catch(e){
+    window.location.href='crypto-alpha-login.html?reason=login';
+  }
+})();
+</script>
+<div class="wrap"><nav class="nav"><div class="brand"><span class="brand-logo"><img alt="CRYPTO ALPHA mascot logo" src="data:image/jpeg;base64,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"/></span>CRYPTO ALPHA</div><div class="meta"><span data-qai18n="t0">MEMBER / VERIFICATION CONSOLE</span></div><div class="nav-tools"><select aria-label="Language" class="lang-select" id="langSelect"><option value="en">EN</option><option value="zh">简中</option><option value="zh-TW">繁中</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="es">ES</option><option value="fr">FR</option><option value="de">DE</option></select></div><div class="member-nav-actions"><span class="member-account" id="memberAccount">MEMBER</span><button type="button" id="memberSignOut" class="member-signout">SIGN OUT</button></div></nav><header class="hero" style="padding-bottom:10px"><div class="eyebrow"><span data-qai18n="t1">MEMBER CONSOLE · 02</span></div><h1><span data-qai18n="t2">Verification Queue.</span></h1><p><span><span data-qai18n="t3">交易所 UID 与会员社交身份审核工作台。</span></span></p></header><section class="stats"><div class="stat"><small><span data-qai18n="t4">TOTAL</span></small><b id="t">0</b></div><div class="stat"><small><span data-qai18n="t5">PENDING</span></small><b id="p">0</b></div><div class="stat"><small><span data-qai18n="t6">APPROVED</span></small><b id="a">0</b></div><div class="stat"><small><span data-qai18n="t7">OTHER</span></small><b id="o">0</b></div></section><div class="tools"><input data-qai18n-placeholder="a0" id="q" placeholder="搜索 UID / QQ / Telegram"/><select id="flt"><option value="all"><span data-qai18n="t8">全部状态</span></option><option value="pending"><span data-qai18n="t9">待审核</span></option><option value="approved"><span data-qai18n="t10">已通过</span></option><option value="more_info"><span data-qai18n="t11">待补资料</span></option><option value="rejected"><span data-qai18n="t12">已拒绝</span></option></select></div>
+<section id="uid-intelligence" class="uid-intel">
+  <div class="uid-intel-head">
+    <div>
+      <div class="eyebrow">UID INTELLIGENCE · EXCHANGE DATA</div>
+      <h2>UID 查询</h2>
+      <p class="muted">输入交易所与 UID，查询已接入的数据，并与 CRYPTO ALPHA 会员验证记录交叉核对。</p>
+    </div>
+    <span class="api-state"><i></i>API READY</span>
+  </div>
+  <form id="uidLookup" class="uid-lookup">
+    <div><label>交易所</label><select id="lookupExchange"><option value="">请选择交易所</option><option>Binance</option><option>OKX</option><option>Bybit</option><option>Gate</option><option>Bitget</option></select></div>
+    <div><label>UID</label><input id="lookupUid" maxlength="64" placeholder="输入交易所 UID"></div>
+    <button class="primary lookup-btn" type="submit">QUERY UID →</button>
+  </form>
+  <div id="uidResult" class="uid-result" aria-live="polite">
+    <div class="uid-empty"><span class="uid-cross"></span><div><b>等待查询</b><p>输入 UID 后，查询结果将在这里显示。</p></div></div>
+  </div>
+</section>
+
+<main id="list" style="padding-bottom:70px"></main><footer><span data-qai18n="t13">CRYPTO ALPHA · MEMBER VERIFICATION CONSOLE · PROTOTYPE</span></footer></div><dialog id="dlg"><div class="eyebrow"><span data-qai18n="t14">APPLICATION REVIEW</span></div><h2 id="dt"></h2><div class="notice" id="di"></div><div class="field" style="margin-top:16px"><label><span><span data-qai18n="t15">邀请群组</span></span></label><select id="grp"><option value=""><span data-qai18n="t16">暂不指定</span></option><option><span data-qai18n="t17">QQ 会员群</span></option><option><span data-qai18n="t18">Telegram 会员群</span></option><option>QQ + Telegram</option></select></div><div class="field"><label><span><span data-qai18n="t19">审核备注</span></span></label><textarea id="rn"></textarea></div><div class="actions"><button class="mini" data-s="more_info"><span><span data-qai18n="t20">待补资料</span></span></button><button class="mini" data-s="rejected"><span><span data-qai18n="t21">拒绝</span></span></button><button class="primary" data-s="approved"><span><span data-qai18n="t22">通过</span></span></button></div><button class="mini" id="close" style="margin-top:10px;width:100%"><span data-qai18n="t23">CLOSE</span></button></dialog><script>
+const K='ca_membership_applications',list=document.getElementById('list'),dlg=document.getElementById('dlg');let active;const esc=s=>String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));const get=()=>JSON.parse(localStorage.getItem(K)||'[]');function render(){let all=get(),q=document.getElementById('q').value.toLowerCase(),f=document.getElementById('flt').value;document.getElementById('t').textContent=all.length;document.getElementById('p').textContent=all.filter(x=>x.status==='pending').length;document.getElementById('a').textContent=all.filter(x=>x.status==='approved').length;document.getElementById('o').textContent=all.filter(x=>!['pending','approved'].includes(x.status)).length;let r=all.filter(x=>(f==='all'||x.status===f)&&(!q||[x.uid,x.qq,x.telegram,x.exchange].join(' ').toLowerCase().includes(q)));list.innerHTML=r.length?r.map(x=>`<article class="app"><div><div class="mono">${esc(x.exchange)} · ${esc(x.id)}</div><b>UID ${esc(x.uid)}</b><div class="muted">${new Date(x.submittedAt).toLocaleString()}</div></div><div class="mono">${x.qq?'QQ '+esc(x.qq):''}${x.telegram?' · TG '+esc(x.telegram):''}</div><div class="muted">SOURCE · ${esc(x.source||'—')}${x.sourceOther?' / '+esc(x.sourceOther):''}</div><div><span class="pill ${x.status}">${x.status.toUpperCase()}</span><div class="muted">${esc(x.groupTarget||'NO GROUP')}</div></div><button class="mini rev" data-id="${esc(x.id)}">REVIEW →</button></article>`).join(''):'<div class="empty" data-i18n="ml8">暂无申请</div>';document.querySelectorAll('.rev').forEach(b=>b.onclick=()=>open(b.dataset.id))}function open(id){let x=get().find(v=>v.id===id);active=id;document.getElementById('dt').textContent=id;document.getElementById('di').innerHTML='<b>'+esc(x.exchange)+' · UID '+esc(x.uid)+'</b><br>QQ: '+esc(x.qq||'—')+'<br>Telegram: '+esc(x.telegram||'—')+(x.source?'<br>Source: '+esc(x.source)+(x.sourceOther?' / '+esc(x.sourceOther):''):'');document.getElementById('grp').value=x.groupTarget||'';document.getElementById('rn').value=x.reviewNote||'';dlg.showModal()}document.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{let a=get(),x=a.find(v=>v.id===active);x.status=b.dataset.s;x.groupTarget=document.getElementById('grp').value;x.reviewNote=document.getElementById('rn').value.trim();x.reviewedAt=new Date().toISOString();localStorage.setItem(K,JSON.stringify(a));dlg.close();render()});document.getElementById('close').onclick=()=>dlg.close();document.getElementById('q').oninput=render;document.getElementById('flt').onchange=render;render();</script>
+<script id="qa-authoritative-i18n-v8">
+(function(){
+const TEXT={"t0": {"en": "MEMBER / VERIFICATION CONSOLE", "zh": "管理 / 验证控制台", "zh-TW": "管理 / 驗證控制台", "ja": "管理 / 認証コンソール", "ko": "관리 / 인증 콘솔", "es": "ADMIN / CONSOLA DE VERIFICACIÓN", "fr": "ADMIN / CONSOLE DE VÉRIFICATION", "de": "ADMIN / VERIFIZIERUNGSKONSOLE"}, "t1": {"en": "MEMBER CONSOLE · 02", "zh": "会员审核 · 02", "zh-TW": "會員審核 · 02", "ja": "会員審査 · 02", "ko": "회원 심사 · 02", "es": "REVISIÓN DE MEMBRESÍA · 02", "fr": "EXAMEN DES ADHÉSIONS · 02", "de": "MITGLIEDSCHAFTSPRÜFUNG · 02"}, "t2": {"en": "Verification Queue.", "zh": "验证队列。", "zh-TW": "驗證佇列。", "ja": "認証キュー。", "ko": "인증 대기열.", "es": "Cola de verificación.", "fr": "File de vérification.", "de": "Verifizierungswarteschlange."}, "t3": {"en": "Review workspace for exchange UIDs and member social identities.", "zh": "交易所 UID 与会员社交身份审核工作台。", "zh-TW": "交易所 UID 與會員社交身份審核工作台。", "ja": "取引所 UID と会員ソーシャル情報の審査ワークスペース。", "ko": "거래소 UID 및 회원 소셜 신원 심사 작업 공간.", "es": "Espacio de revisión de UID y perfiles sociales de miembros.", "fr": "Espace d’examen des UID et identités sociales des membres.", "de": "Arbeitsbereich zur Prüfung von Börsen-UIDs und Social-Identitäten."}, "t4": {"en": "TOTAL", "zh": "总计", "zh-TW": "總計", "ja": "合計", "ko": "전체", "es": "TOTAL", "fr": "TOTAL", "de": "GESAMT"}, "t5": {"en": "PENDING", "zh": "待审核", "zh-TW": "待審核", "ja": "審査待ち", "ko": "심사 대기", "es": "PENDIENTE", "fr": "EN ATTENTE", "de": "AUSSTEHEND"}, "t6": {"en": "APPROVED", "zh": "已通过", "zh-TW": "已通過", "ja": "承認済み", "ko": "승인됨", "es": "APROBADO", "fr": "APPROUVÉ", "de": "GENEHMIGT"}, "t7": {"en": "OTHER", "zh": "其他", "zh-TW": "其他", "ja": "その他", "ko": "기타", "es": "OTROS", "fr": "AUTRE", "de": "ANDERE"}, "t8": {"en": "All Statuses", "zh": "全部状态", "zh-TW": "全部狀態", "ja": "すべての状態", "ko": "전체 상태", "es": "Todos los estados", "fr": "Tous les statuts", "de": "Alle Status"}, "t9": {"en": "Pending", "zh": "待审核", "zh-TW": "待審核", "ja": "審査待ち", "ko": "심사 대기", "es": "Pendiente", "fr": "En attente", "de": "Ausstehend"}, "t10": {"en": "Approved", "zh": "已通过", "zh-TW": "已通過", "ja": "承認済み", "ko": "승인됨", "es": "Aprobado", "fr": "Approuvé", "de": "Genehmigt"}, "t11": {"en": "Need Info", "zh": "待补资料", "zh-TW": "待補資料", "ja": "追加情報待ち", "ko": "추가 정보 필요", "es": "Falta información", "fr": "Informations requises", "de": "Weitere Angaben"}, "t12": {"en": "Rejected", "zh": "已拒绝", "zh-TW": "已拒絕", "ja": "却下", "ko": "거절됨", "es": "Rechazado", "fr": "Refusé", "de": "Abgelehnt"}, "t13": {"en": "CRYPTO ALPHA · MEMBER VERIFICATION CONSOLE · PROTOTYPE", "zh": "CRYPTO ALPHA · 内部审核控制台 · 原型", "zh-TW": "CRYPTO ALPHA · 內部審核控制台 · 原型", "ja": "CRYPTO ALPHA · 内部審査コンソール · プロトタイプ", "ko": "CRYPTO ALPHA · 내부 심사 콘솔 · 프로토타입", "es": "CRYPTO ALPHA · CONSOLA INTERNA · PROTOTIPO", "fr": "CRYPTO ALPHA · CONSOLE INTERNE · PROTOTYPE", "de": "CRYPTO ALPHA · INTERNE PRÜFKONSOLE · PROTOTYP"}, "t14": {"en": "APPLICATION REVIEW", "zh": "申请审核", "zh-TW": "申請審核", "ja": "申請審査", "ko": "신청 심사", "es": "REVISIÓN DE SOLICITUD", "fr": "EXAMEN DE LA DEMANDE", "de": "ANTRAGSPRÜFUNG"}, "t15": {"en": "Invitation Group", "zh": "邀请群组", "zh-TW": "邀請群組", "ja": "招待グループ", "ko": "초대 그룹", "es": "Grupo de invitación", "fr": "Groupe d’invitation", "de": "Einladungsgruppe"}, "t16": {"en": "Not assigned", "zh": "暂不指定", "zh-TW": "暫不指定", "ja": "未指定", "ko": "미지정", "es": "Sin asignar", "fr": "Non attribué", "de": "Nicht zugewiesen"}, "t17": {"en": "QQ Member Group", "zh": "QQ 会员群", "zh-TW": "QQ 會員群", "ja": "QQ 会員グループ", "ko": "QQ 회원 그룹", "es": "Grupo de miembros QQ", "fr": "Groupe membre QQ", "de": "QQ-Mitgliedergruppe"}, "t18": {"en": "Telegram Member Group", "zh": "Telegram 会员群", "zh-TW": "Telegram 會員群", "ja": "Telegram 会員グループ", "ko": "Telegram 회원 그룹", "es": "Grupo de miembros Telegram", "fr": "Groupe membre Telegram", "de": "Telegram-Mitgliedergruppe"}, "t19": {"en": "Review Notes", "zh": "审核备注", "zh-TW": "審核備註", "ja": "審査メモ", "ko": "심사 메모", "es": "Notas de revisión", "fr": "Notes d’examen", "de": "Prüfnotiz"}, "t20": {"en": "Need Info", "zh": "待补资料", "zh-TW": "待補資料", "ja": "追加情報待ち", "ko": "추가 정보 필요", "es": "Falta información", "fr": "Informations requises", "de": "Weitere Angaben"}, "t21": {"en": "Reject", "zh": "拒绝", "zh-TW": "拒絕", "ja": "却下", "ko": "거절", "es": "Rechazar", "fr": "Refuser", "de": "Ablehnen"}, "t22": {"en": "Approve", "zh": "通过", "zh-TW": "通過", "ja": "承認", "ko": "승인", "es": "Aprobar", "fr": "Approuver", "de": "Genehmigen"}, "t23": {"en": "CLOSE", "zh": "关闭", "zh-TW": "關閉", "ja": "閉じる", "ko": "닫기", "es": "CERRAR", "fr": "FERMER", "de": "SCHLIESSEN"}};
+const ATTR={"a0": {"en": "Search UID / QQ / Telegram", "zh": "搜索 UID / QQ / Telegram", "zh-TW": "搜尋 UID / QQ / Telegram", "ja": "UID / QQ / Telegram を検索", "ko": "UID / QQ / Telegram 검색", "es": "Buscar UID / QQ / Telegram", "fr": "Rechercher UID / QQ / Telegram", "de": "UID / QQ / Telegram suchen"}};
+const SUP=["en", "zh", "zh-TW", "ja", "ko", "es", "fr", "de"];
+const dynamic={
+'暂无申请':{en:'No applications',zh:'暂无申请','zh-TW':'暫無申請',ja:'申請はありません',ko:'신청 없음',es:'No hay solicitudes',fr:'Aucune demande',de:'Keine Anträge'},
+'提交成功 · PENDING REVIEW':{en:'Submitted · PENDING REVIEW',zh:'提交成功 · 待审核','zh-TW':'提交成功 · 待審核',ja:'送信完了 · 審査待ち',ko:'제출 완료 · 심사 대기',es:'Enviado · PENDIENTE',fr:'Envoyé · EN ATTENTE',de:'Eingereicht · AUSSTEHEND'},
+'申请编号：':{en:'Application ID: ',zh:'申请编号：','zh-TW':'申請編號：',ja:'申請番号：',ko:'신청 번호: ',es:'ID de solicitud: ',fr:'ID de demande : ',de:'Antrags-ID: '},
+'界面演示：登录 UI 已完成。正式上线后这里连接服务器认证 API，并在成功后进入会员中心。':{en:'Demo UI only. Connect the server authentication API here for production, then enter the member center after successful sign-in.',zh:'界面演示：登录 UI 已完成。正式上线后这里连接服务器认证 API，并在成功后进入会员中心。','zh-TW':'介面展示：登入 UI 已完成。正式上線後請在此連接伺服器驗證 API，成功後進入會員中心。',ja:'デモ UI です。本番環境ではここにサーバー認証 API を接続し、ログイン成功後に会員センターへ移動します。',ko:'데모 UI입니다. 실제 서비스에서는 서버 인증 API를 연결하고 로그인 성공 후 회원 센터로 이동합니다.',es:'Interfaz de demostración. En producción, conecta aquí la API de autenticación y entra al centro de miembros tras iniciar sesión.',fr:'Interface de démonstration. En production, connectez ici l’API d’authentification puis ouvrez l’espace membre après connexion.',de:'Demo-Oberfläche. In Produktion hier die Server-Authentifizierungs-API anbinden und nach erfolgreicher Anmeldung zum Mitgliederbereich wechseln.'},
+'2FA 入口已预留。正式系统建议在账号密码验证成功后再要求 Authenticator 动态码。':{en:'The 2FA entry is reserved. In production, request an Authenticator code after account and password verification.',zh:'2FA 入口已预留。正式系统建议在账号密码验证成功后再要求 Authenticator 动态码。','zh-TW':'已預留 2FA 入口。正式系統建議在帳號密碼驗證成功後再要求 Authenticator 動態碼。',ja:'2FA 導線は予約済みです。本番ではアカウントとパスワードの確認後に Authenticator コードを要求してください。',ko:'2FA 진입점이 준비되어 있습니다. 실제 시스템에서는 계정/비밀번호 인증 후 Authenticator 코드를 요청하세요.',es:'La entrada 2FA está reservada. En producción, solicita el código Authenticator después de validar cuenta y contraseña.',fr:'L’entrée 2FA est prévue. En production, demandez le code Authenticator après validation du compte et du mot de passe.',de:'Der 2FA-Einstieg ist vorgesehen. In Produktion den Authenticator-Code nach Konto- und Passwortprüfung anfordern.'},
+'客服入口已预留，可接入你们正式的 Telegram / QQ 客服流程。':{en:'The support entry is reserved and can connect to your official Telegram / QQ support flow.',zh:'客服入口已预留，可接入你们正式的 Telegram / QQ 客服流程。','zh-TW':'客服入口已預留，可接入正式的 Telegram / QQ 客服流程。',ja:'サポート導線は予約済みで、正式な Telegram / QQ サポートフローに接続できます。',ko:'고객지원 진입점이 준비되어 있으며 공식 Telegram / QQ 지원 절차에 연결할 수 있습니다.',es:'La entrada de soporte está reservada y puede conectarse al flujo oficial de Telegram / QQ.',fr:'L’entrée support est prévue et peut être reliée au support officiel Telegram / QQ.',de:'Der Support-Einstieg ist vorgesehen und kann mit dem offiziellen Telegram-/QQ-Support verbunden werden.'},
+'密码找回入口已预留。正式系统应使用一次性、短时效的服务器重置链接。':{en:'Password recovery is reserved. Production should use a one-time, short-lived server reset link.',zh:'密码找回入口已预留。正式系统应使用一次性、短时效的服务器重置链接。','zh-TW':'密碼找回入口已預留。正式系統應使用一次性、短時效的伺服器重設連結。',ja:'パスワード再設定導線は予約済みです。本番では一度限り・短時間有効のサーバー再設定リンクを使用してください。',ko:'비밀번호 복구 진입점이 준비되어 있습니다. 실제 시스템에서는 일회성 단기 만료 서버 재설정 링크를 사용하세요.',es:'La recuperación de contraseña está reservada. En producción usa un enlace de restablecimiento único y de corta duración.',fr:'La récupération du mot de passe est prévue. En production, utilisez un lien serveur unique et de courte durée.',de:'Die Passwort-Wiederherstellung ist vorgesehen. In Produktion einen einmaligen, kurz gültigen Server-Reset-Link verwenden.'}
+};
+function autoLang(){let n=(navigator.language||'en').toLowerCase();if(n.startsWith('zh-tw')||n.startsWith('zh-hk')||n.startsWith('zh-mo')||n.includes('hant'))return 'zh-TW';if(n.startsWith('zh'))return 'zh';for(const l of ['ja','ko','es','fr','de'])if(n.startsWith(l))return l;return 'en'}
+function current(){let s=document.getElementById('langSelect');return (s&&s.value)||localStorage.getItem('qa-lang')||autoLang()}
+function translateDynamic(root,l){
+ const w=document.createTreeWalker(root||document.body,NodeFilter.SHOW_TEXT);let n,arr=[];while(n=w.nextNode()){if(n.parentElement&&!['SCRIPT','STYLE'].includes(n.parentElement.tagName))arr.push(n)}
+ arr.forEach(n=>{let v=n.nodeValue;for(const [src,d] of Object.entries(dynamic))if(v.includes(src))v=v.split(src).join(d[l]||d.en);n.nodeValue=v});
+}
+function apply(l){
+ if(!SUP.includes(l))l='en';document.documentElement.lang=l;
+ document.querySelectorAll('[data-qai18n]').forEach(el=>{let d=TEXT[el.dataset.qai18n];if(d)el.textContent=d[l]});
+ for(const a of ['placeholder','title','arialabel'])document.querySelectorAll('[data-qai18n-'+a+']').forEach(el=>{let d=ATTR[el.getAttribute('data-qai18n-'+a)];if(d)el.setAttribute(a==='arialabel'?'aria-label':a,d[l])});
+ let s=document.getElementById('langSelect');if(s)s.value=l;localStorage.setItem('qa-lang',l);translateDynamic(document.body,l);
+}
+let s=document.getElementById('langSelect');if(s)s.addEventListener('change',()=>apply(s.value));
+new MutationObserver(ms=>{let l=current();ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)translateDynamic(n,l)}))}).observe(document.body,{childList:true,subtree:true});
+apply(localStorage.getItem('qa-lang')||autoLang());
+})();
+</script><script id="qa-v8-final-small-fixes">(function(){const A={"v8fix0": {"en": "CRYPTO ALPHA · Review Console", "zh": "CRYPTO ALPHA · 审核控制台", "zh-TW": "CRYPTO ALPHA · 審核控制台", "ja": "CRYPTO ALPHA · 審査コンソール", "ko": "CRYPTO ALPHA · 심사 콘솔", "es": "CRYPTO ALPHA · Consola de revisión", "fr": "CRYPTO ALPHA · Console d’examen", "de": "CRYPTO ALPHA · Prüfkonsole"}},Q={"en": "QQ Number / ID", "zh": "QQ 号 / ID", "zh-TW": "QQ 號 / ID", "ja": "QQ 番号 / ID", "ko": "QQ 번호 / ID", "es": "Número / ID de QQ", "fr": "Numéro / ID QQ", "de": "QQ-Nummer / ID"};function run(){let l=(document.getElementById('langSelect')||{}).value||localStorage.getItem('qa-lang')||'en';document.querySelectorAll('[data-qai18n-v8fix]').forEach(e=>e.textContent=A[e.dataset.qai18nV8fix][l]);let t=document.querySelector('[data-qai18n-v8title]');if(t&&A.title)t.textContent=A.title[l];document.querySelectorAll('[data-qai18n-v8qq]').forEach(e=>e.placeholder=Q[l]);}let s=document.getElementById('langSelect');if(s)s.addEventListener('change',()=>setTimeout(run,0));setTimeout(run,0)})();</script>
+<script id="uid-intelligence">
+(function(){
+  const form=document.getElementById('uidLookup');
+  const out=document.getElementById('uidResult');
+  if(!form||!out)return;
+
+  const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]);
+  const L={
+    en:{inv:'INVITED',act:'ACTIVE',yes:'YES',no:'NO',invYes:'Invitation completed',invNo:'Not invited',actYes:'Currently active',actNo:'Currently inactive',link:'Member Linkage',src:'REFERRAL SOURCE',grp:'GROUP',note:'STATUS ONLY',need:'Enter exchange and UID',need2:'Both fields are required.',query:'QUERYING',none:'No local verification record found.'},
+    zh:{inv:'已邀请',act:'活跃',yes:'是',no:'否',invYes:'已完成会员邀请',invNo:'尚未邀请',actYes:'当前活跃',actNo:'当前非活跃',link:'会员关联',src:'来源渠道',grp:'会员群',note:'仅显示状态',need:'请输入交易所与 UID',need2:'查询需要两个字段。',query:'正在查询',none:'未找到该 UID 的会员验证记录。'},
+    'zh-TW':{inv:'已邀請',act:'活躍',yes:'是',no:'否',invYes:'已完成會員邀請',invNo:'尚未邀請',actYes:'目前活躍',actNo:'目前非活躍',link:'會員關聯',src:'來源渠道',grp:'會員群',note:'僅顯示狀態',need:'請輸入交易所與 UID',need2:'查詢需要兩個欄位。',query:'正在查詢',none:'未找到該 UID 的會員驗證記錄。'},
+    ja:{inv:'招待',act:'アクティブ',yes:'はい',no:'いいえ',invYes:'会員招待済み',invNo:'未招待',actYes:'現在アクティブ',actNo:'現在非アクティブ',link:'会員連携',src:'流入元',grp:'会員グループ',note:'ステータスのみ',need:'取引所と UID を入力してください',need2:'両方の項目が必要です。',query:'照会中',none:'この UID の会員認証記録はありません。'},
+    ko:{inv:'초대',act:'활성',yes:'예',no:'아니오',invYes:'회원 초대 완료',invNo:'아직 초대하지 않음',actYes:'현재 활성',actNo:'현재 비활성',link:'회원 연계',src:'유입 경로',grp:'회원 그룹',note:'상태만 표시',need:'거래소와 UID를 입력하세요',need2:'두 항목이 필요합니다.',query:'조회 중',none:'해당 UID의 회원 인증 기록이 없습니다.'},
+    es:{inv:'INVITADO',act:'ACTIVO',yes:'SÍ',no:'NO',invYes:'Invitación completada',invNo:'No invitado',actYes:'Actualmente activo',actNo:'Actualmente inactivo',link:'Vinculación',src:'FUENTE',grp:'GRUPO',note:'SOLO ESTADO',need:'Introduce exchange y UID',need2:'Ambos campos son necesarios.',query:'CONSULTANDO',none:'No hay registro local para este UID.'},
+    fr:{inv:'INVITÉ',act:'ACTIF',yes:'OUI',no:'NON',invYes:'Invitation effectuée',invNo:'Non invité',actYes:'Actif actuellement',actNo:'Inactif actuellement',link:'Liaison membre',src:'SOURCE',grp:'GROUPE',note:'STATUT UNIQUEMENT',need:"Saisissez la plateforme et l’UID",need2:'Les deux champs sont requis.',query:'RECHERCHE',none:"Aucun enregistrement local pour cet UID."},
+    de:{inv:'EINGELADEN',act:'AKTIV',yes:'JA',no:'NEIN',invYes:'Einladung abgeschlossen',invNo:'Noch nicht eingeladen',actYes:'Derzeit aktiv',actNo:'Derzeit inaktiv',link:'Mitgliederverknüpfung',src:'HERKUNFT',grp:'GRUPPE',note:'NUR STATUS',need:'Börse und UID eingeben',need2:'Beide Felder sind erforderlich.',query:'ABFRAGE',none:'Kein lokaler Datensatz für diese UID.'}
+  };
+
+  function lang(){
+    const s=document.getElementById('langSelect');
+    return (s&&s.value)||localStorage.getItem('qa-lang')||'en';
+  }
+  function t(k){const d=L[lang()]||L.en;return d[k]||L.en[k]||k;}
+
+  function getLocal(exchange,uid){
+    let a=[];
+    try{a=JSON.parse(localStorage.getItem('ca_membership_applications')||'[]')}catch(e){}
+    return a.find(x=>String(x.exchange||'')===exchange&&String(x.uid||'')===uid)||null;
+  }
+
+  async function lookup(exchange,uid){
+    await new Promise(r=>setTimeout(r,280));
+    const r=getLocal(exchange,uid);
+    if(!r){
+      return {exchange,uid,invited:false,active:false,referral:'—',group:'—',social:[],source:'NO LOCAL RECORD',note:t('none')};
+    }
+    return {
+      exchange,uid,
+      invited:String(r.status||'pending')==='approved',
+      active:String(r.activeStatus||'').toLowerCase()==='active',
+      referral:r.source?(r.source+(r.sourceOther?' / '+r.sourceOther:'')):'—',
+      group:r.groupTarget||'—',
+      social:[r.qq?'QQ '+r.qq:'',r.telegram?'Telegram '+r.telegram:''].filter(Boolean),
+      source:'LOCAL MEMBERSHIP RECORD',
+      note:''
+    };
+  }
+
+  function render(d){
+    out.innerHTML=
+      '<div class="uid-result-card">'+
+      '<section class="uid-profile">'+
+        '<div class="uid-section-kicker">EXCHANGE / UID</div>'+
+        '<div class="uid-hero-row"><div><div class="uid-name">'+esc(d.exchange)+'</div><div class="uid-sub">UID · '+esc(d.uid)+'</div></div></div>'+
+        '<div class="uid-state-grid">'+
+          '<div class="uid-state '+(d.invited?'ok':'no')+'"><span>'+t('inv')+'</span><b>'+(d.invited?t('yes'):t('no'))+'</b><small>'+(d.invited?t('invYes'):t('invNo'))+'</small></div>'+
+          '<div class="uid-state '+(d.active?'ok':'no')+'"><span>'+t('act')+'</span><b>'+(d.active?t('yes'):t('no'))+'</b><small>'+(d.active?t('actYes'):t('actNo'))+'</small></div>'+
+        '</div>'+
+      '</section>'+
+      '<section class="uid-linkage">'+
+        '<div class="uid-section-kicker">CRYPTO ALPHA LINKAGE</div>'+
+        '<h3>'+t('link')+'</h3>'+
+        '<div>'+(d.social.length?d.social.map(x=>'<span class="link-badge ok">'+esc(x)+'</span>').join(''):'<span class="link-badge warn">NO SOCIAL ID</span>')+'</div>'+
+        '<div class="uid-table" style="margin-top:8px"><div>'+t('src')+'</div><div>'+esc(d.referral)+'</div><div>'+t('grp')+'</div><div>'+esc(d.group)+'</div></div>'+
+        '<div class="uid-audit">'+esc(d.note)+'</div>'+
+      '</section></div>'+
+      '<div class="uid-foot"><span>UID QUERY · READ-ONLY</span><span class="uid-demo-note">'+t('note')+'</span></div>';
+  }
+
+  form.addEventListener('submit',async e=>{
+    e.preventDefault();
+    const ex=document.getElementById('lookupExchange').value.trim();
+    const uid=document.getElementById('lookupUid').value.trim();
+    if(!ex||!uid){
+      out.innerHTML='<div class="uid-empty"><div><b>'+t('need')+'</b><p>'+t('need2')+'</p></div></div>';
+      return;
+    }
+    out.innerHTML='<div class="uid-empty"><div><b>'+t('query')+'</b><p>'+esc(ex)+' · '+esc(uid)+'</p></div></div>';
+    render(await lookup(ex,uid));
+  });
+
+  document.getElementById('langSelect')?.addEventListener('change',()=>{
+    const ex=document.getElementById('lookupExchange')?.value.trim();
+    const uid=document.getElementById('lookupUid')?.value.trim();
+    if(ex&&uid)lookup(ex,uid).then(render);
+  });
+})();
+</script>
+
+<script id="member-auth-actions">
+(function(){
+ const btn=document.getElementById('memberSignOut');
+ const acct=document.getElementById('memberAccount');
+ try{
+   const account=localStorage.getItem('ca_member_account');
+   if(acct && account)acct.textContent=account;
+ }catch(e){}
+ if(btn)btn.addEventListener('click',function(){
+   try{
+     localStorage.removeItem('ca_member_session');
+     localStorage.removeItem('ca_member_account');
+   }catch(e){}
+   window.location.href='crypto-alpha-login.html?loggedout=1';
+ });
+})();
+</script>
+</body></html>

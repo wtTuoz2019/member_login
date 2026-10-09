@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CRYPTO ALPHA · Sign In</title>
+<style>
+:root{--bg:#05090b;--panel:#08100e;--text:#edf7f2;--muted:#81938b;--line:rgba(146,183,168,.15);--green:#48dba4;--cyan:#55cfe2}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(72,219,164,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(72,219,164,.025) 1px,transparent 1px);background-size:56px 56px;mask-image:linear-gradient(to bottom,#000,transparent 92%)}
+body:after{content:"";position:fixed;width:620px;height:620px;left:9%;top:14%;border:1px solid rgba(72,219,164,.045);border-radius:50%;pointer-events:none}
+.shell{width:min(1160px,calc(100% - 40px));margin:auto;position:relative;z-index:1}
+.nav{height:72px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:11px;font-size:12px;font-weight:800;letter-spacing:.1em}
+.mark{width:29px;height:29px;border:1px solid rgba(72,219,164,.58);border-radius:50%;display:grid;place-items:center;color:var(--green);font:700 9px ui-monospace,monospace;box-shadow:0 0 30px rgba(72,219,164,.08)}
+.navmeta{color:var(--muted);font:700 8px ui-monospace,monospace;letter-spacing:.14em}
+.layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(360px,.65fr);gap:80px;align-items:center;padding:80px 0 90px}
+.eyebrow{color:var(--green);font:700 9px ui-monospace,monospace;letter-spacing:.16em}
+.intro h1{max-width:690px;margin:18px 0 22px;font-size:clamp(46px,6.5vw,82px);line-height:.94;letter-spacing:-.065em;font-weight:680}
+.intro>p{max-width:570px;margin:0;color:var(--muted);font-size:12px;line-height:1.85}
+.signal{position:relative;margin-top:54px;max-width:600px;height:130px;border-block:1px solid var(--line);overflow:hidden}
+.signal svg{width:100%;height:100%}
+.signal-grid{stroke:rgba(130,170,154,.09);stroke-width:1}
+.signal-path{fill:none;stroke:var(--green);stroke-width:1.2;vector-effect:non-scaling-stroke}
+.signal-area{fill:url(#fade)}
+.signal-dot{fill:var(--bg);stroke:var(--green);stroke-width:1.2}
+.signal-meta{position:absolute;left:0;bottom:10px;display:flex;gap:22px;color:var(--muted);font:700 7px ui-monospace,monospace;letter-spacing:.08em}
+.signal-meta b{color:var(--green);font-weight:700}
+.login{position:relative;padding:29px;border:1px solid var(--line);border-radius:20px;background:rgba(8,16,14,.78);backdrop-filter:blur(20px);box-shadow:0 35px 90px rgba(0,0,0,.24);overflow:hidden}
+.login:before{content:"";position:absolute;left:29px;top:-1px;width:76px;height:1px;background:var(--green)}
+.login:after{content:"";position:absolute;width:210px;height:210px;right:-130px;top:-125px;border:1px solid rgba(72,219,164,.09);border-radius:50%;pointer-events:none}
+.login-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:29px}
+.login-head small{display:block;color:var(--muted);font:700 8px ui-monospace,monospace;letter-spacing:.1em;margin-bottom:7px}
+.login-head h2{margin:0;font-size:20px;letter-spacing:-.02em}
+.secure{display:flex;align-items:center;gap:6px;color:var(--muted);font:700 7px ui-monospace,monospace;letter-spacing:.08em}
+.secure i{width:5px;height:5px;background:var(--green);border-radius:50%;box-shadow:0 0 0 4px rgba(72,219,164,.07)}
+.field{margin-bottom:17px}
+.field label{display:flex;justify-content:space-between;margin-bottom:8px;color:#b8c8c1;font-size:10px;font-weight:650}
+.field label span{color:var(--muted);font:700 7px ui-monospace,monospace}
+.input-wrap{position:relative}
+input{width:100%;height:49px;padding:0 45px 0 14px;border:1px solid var(--line);border-radius:9px;background:#050b0a;color:var(--text);outline:none;font-size:13px;transition:border-color .18s,box-shadow .18s}
+input:focus{border-color:rgba(72,219,164,.65);box-shadow:0 0 0 3px rgba(72,219,164,.06)}
+input::placeholder{color:#50615a}
+.eye{position:absolute;right:7px;top:7px;width:35px;height:35px;border:0;background:transparent;color:var(--muted);cursor:pointer;font:700 8px ui-monospace,monospace}
+.row{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:4px 0 20px}
+.remember{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:9px}.remember input{width:14px;height:14px;accent-color:var(--green)}
+.link{color:#a9bbb3;text-decoration:none;font-size:9px}.link:hover{color:var(--green)}
+.primary{width:100%;height:50px;border:0;border-radius:9px;background:var(--green);color:#04110c;font-weight:850;letter-spacing:.04em;cursor:pointer;transition:transform .15s,filter .15s}.primary:hover{filter:brightness(1.05);transform:translateY(-1px)}.primary:active{transform:none}
+.divider{display:flex;align-items:center;gap:12px;margin:21px 0;color:#53655d;font:700 7px ui-monospace,monospace;letter-spacing:.1em}.divider:before,.divider:after{content:"";height:1px;flex:1;background:var(--line)}
+.alt{display:grid;grid-template-columns:1fr 1fr;gap:9px}.alt button{height:43px;border:1px solid var(--line);border-radius:9px;background:transparent;color:#a9bbb3;font:700 8px ui-monospace,monospace;cursor:pointer}.alt button:hover{border-color:rgba(72,219,164,.4);color:var(--text)}
+.notice{margin-top:22px;padding-top:17px;border-top:1px solid var(--line);color:var(--muted);font-size:8px;line-height:1.65}.notice b{color:#aebfb7}
+.msg{display:none;margin-top:14px;padding:12px;border:1px solid rgba(72,219,164,.25);border-radius:9px;color:#a8bbb2;font-size:9px;line-height:1.55}.msg.on{display:block}
+.access{margin-top:20px;text-align:center;color:var(--muted);font-size:9px}.access a{color:var(--green);text-decoration:none}
+footer{border-top:1px solid var(--line);padding:23px 0 36px;display:flex;justify-content:space-between;gap:20px;color:var(--muted);font:600 8px ui-monospace,monospace;letter-spacing:.08em}
+.cross{position:fixed;z-index:20;width:74px;height:74px;pointer-events:none;opacity:0;transform:translate(-200px,-200px);transition:opacity .2s}.cross.on{opacity:.5}.cross:before,.cross:after{content:"";position:absolute;background:rgba(72,219,164,.2)}.cross:before{width:1px;height:100%;left:50%}.cross:after{height:1px;width:100%;top:50%}
+@media(max-width:850px){.layout{grid-template-columns:1fr;gap:45px;padding:52px 0 70px}.intro h1{font-size:clamp(44px,12vw,68px)}.signal{margin-top:36px}.login{max-width:540px;width:100%}}
+@media(max-width:520px){.shell{width:calc(100% - 26px)}.navmeta{display:none}.layout{padding-top:42px}.login{padding:21px}.login:before{left:21px}.alt{grid-template-columns:1fr}.row{align-items:flex-start}.cross{display:none}footer{display:block;line-height:2}}
+@media(prefers-reduced-motion:reduce){.cross{display:none}.primary{transition:none}}
+
+
+/* ===== UNIFIED CRYPTO ALPHA BRAND HEADER ===== */
+.nav{
+  height:76px !important;
+  min-height:76px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+}
+.brand{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:12px !important;
+  min-height:40px !important;
+  margin:0 !important;
+  padding:0 !important;
+  color:var(--text,#edf7f2) !important;
+  font-size:12px !important;
+  font-weight:800 !important;
+  line-height:1 !important;
+  letter-spacing:.105em !important;
+  white-space:nowrap !important;
+}
+.brand .brand-logo{
+  position:relative !important;
+  display:block !important;
+  width:36px !important;
+  height:36px !important;
+  min-width:36px !important;
+  flex:0 0 36px !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:1px solid rgba(72,219,164,.42) !important;
+  border-radius:11px !important;
+  overflow:hidden !important;
+  background:#62f56b !important;
+  box-shadow:0 0 0 1px rgba(255,255,255,.025),0 0 28px rgba(72,219,164,.08) !important;
+  vertical-align:middle !important;
+}
+.brand .brand-logo:after{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  border-radius:inherit !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.055) !important;
+  pointer-events:none !important;
+}
+.brand .brand-logo img{
+  position:absolute !important;
+  inset:0 !important;
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+  object-fit:cover !important;
+  object-position:50% 48% !important;
+  transform:none !important;
+}
+.navmeta,.nav-meta{
+  display:flex !important;
+  align-items:center !important;
+  min-height:36px !important;
+  margin:0 !important;
+  line-height:1 !important;
+}
+@media(max-width:520px){
+  .nav{height:68px !important;min-height:68px !important}
+  .brand{gap:10px !important;font-size:11px !important}
+  .brand .brand-logo{width:33px !important;height:33px !important;min-width:33px !important;flex-basis:33px !important;border-radius:10px !important}
+}
+
+
+.lang-select{height:34px!important;min-height:34px!important;width:auto!important;min-width:82px!important;margin-left:14px!important;padding:0 28px 0 10px!important;border:1px solid var(--line,#193029)!important;border-radius:8px!important;background:#07100e!important;color:var(--muted,#81938b)!important;font:700 8px ui-monospace,monospace!important;letter-spacing:.05em!important;outline:none!important}
+.nav-tools{display:flex;align-items:center;gap:10px}.nav-tools .navmeta,.nav-tools .nav-meta{margin:0!important}
+@media(max-width:520px){.nav-tools .navmeta,.nav-tools .nav-meta{display:none!important}.lang-select{min-width:76px!important;margin-left:0!important}}
+
+/* ===== COMPACT MOBILE V4 ===== */
+@media(max-width:760px){
+  .wrap,.shell{width:calc(100% - 22px)!important}
+  .nav{height:60px!important;min-height:60px!important}
+  .brand{gap:8px!important;font-size:10px!important;letter-spacing:.075em!important}
+  .brand .brand-logo{width:30px!important;height:30px!important;min-width:30px!important;flex-basis:30px!important;border-radius:9px!important}
+  .lang-select{height:30px!important;min-height:30px!important;min-width:68px!important;padding:0 24px 0 8px!important;font-size:7px!important}
+  .hero{padding:34px 0 16px!important}
+  .hero h1,.adminhero h1{margin:10px 0 10px!important;font-size:clamp(32px,10vw,46px)!important;line-height:.98!important}
+  .hero p{font-size:10px!important;line-height:1.65!important}
+  .eyebrow{font-size:7px!important}
+  .grid{gap:11px!important;padding:12px 0 42px!important}
+  .panel{padding:17px!important;border-radius:14px!important}
+  .panel:before{left:17px!important;width:54px!important}
+  .panel h2{margin:5px 0 17px!important;font-size:15px!important}
+  .panel-title{margin-bottom:17px!important}
+  .field{margin-bottom:13px!important}
+  .field label{margin-bottom:6px!important;font-size:9px!important}
+  input,select,textarea{min-height:42px!important;height:42px!important;padding-left:11px!important;padding-right:11px!important;border-radius:8px!important;font-size:12px!important}
+  textarea{height:auto!important;min-height:70px!important;padding-top:10px!important}
+  .social{gap:7px!important}
+  .hint,.muted{font-size:8px!important;line-height:1.5!important}
+  .notice{padding:11px!important;font-size:8px!important;line-height:1.55!important}
+  .check{margin:13px 0!important;font-size:8px!important;line-height:1.5!important}
+  .primary{height:44px!important;min-height:44px!important;font-size:11px!important}
+  .referral-tags{gap:6px!important}
+  .referral-tag{min-height:30px!important;padding:0 10px!important;font-size:8px!important}
+  .step{grid-template-columns:24px 1fr!important;gap:9px!important;padding:12px 0!important}
+  .step i{width:23px!important;height:23px!important;font-size:7px!important}
+  .step b{font-size:10px!important}.step p{font-size:8px!important;margin-top:3px!important}
+  footer{padding:17px 0 24px!important;font-size:7px!important}
+  .stats{gap:7px!important;margin:14px 0 17px!important}
+  .stat{padding:11px!important}.stat b{font-size:19px!important;margin-top:4px!important}.stat small{font-size:7px!important}
+  .tools{gap:7px!important;margin:12px 0!important}
+  .tools input,.tools select{width:100%!important;min-width:0!important}
+  .app{gap:9px!important;padding:13px!important;border-radius:10px!important;margin-bottom:7px!important}
+  .mono{font-size:8px!important}.pill{padding:4px 6px!important;font-size:6px!important}
+  .mini{padding:7px 8px!important;font-size:7px!important}
+  dialog{padding:17px!important;border-radius:14px!important}
+}
+@media(max-width:520px){
+  .layout{padding:31px 0 42px!important;gap:28px!important}
+  .intro h1{margin:10px 0 13px!important;font-size:clamp(38px,12vw,52px)!important}
+  .intro>p{font-size:10px!important;line-height:1.65!important}
+  .signal{height:92px!important;margin-top:25px!important}
+  .signal-meta{bottom:7px!important;gap:10px!important;font-size:6px!important}
+  .login{padding:17px!important;border-radius:14px!important}
+  .login:before{left:17px!important;width:54px!important}
+  .login-head{margin-bottom:19px!important}
+  .login-head h2{font-size:17px!important}
+  .login-head small,.secure{font-size:7px!important}
+  .row{margin:2px 0 15px!important}
+  .divider{margin:16px 0!important}
+  .alt{gap:7px!important}.alt button{height:39px!important}
+  .notice{margin-top:16px!important;padding-top:13px!important}
+  .access{margin-top:14px!important;font-size:8px!important}
+}
+@media(max-width:380px){
+  .wrap,.shell{width:calc(100% - 16px)!important}
+  .brand{font-size:9px!important}.brand .brand-logo{width:28px!important;height:28px!important;min-width:28px!important;flex-basis:28px!important}
+  .lang-select{min-width:62px!important}
+  .panel,.login{padding:14px!important}
+  .hero h1,.adminhero h1{font-size:30px!important}
+  .referral-tag{padding:0 8px!important}
+}
+
+
+.member-admin-link{margin-top:10px;text-align:center;color:var(--muted);font-size:8px}
+.member-admin-link a{color:var(--muted);text-decoration:none;margin-left:3px}
+.member-admin-link a:hover{color:var(--green)}
+
+.member-session-note{margin-top:10px;text-align:center;color:var(--muted);font-size:8px;line-height:1.5}
+</style></head>
+<body>
+<div class="cross" aria-hidden="true"></div>
+<div class="shell">
+<nav class="nav"><div class="brand"><span class="brand-logo"><img src="data:image/jpeg;base64,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" alt="CRYPTO ALPHA mascot logo"></span>CRYPTO ALPHA</div><div class="navmeta">MEMBER SYSTEM / AUTHENTICATION</div><div class="nav-tools"><select id="langSelect" class="lang-select" aria-label="Language"><option value="en">EN</option><option value="zh">简中</option><option value="zh-TW">繁中</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="es">ES</option><option value="fr">FR</option><option value="de">DE</option></select></div></nav>
+<main class="layout">
+<section class="intro">
+<div class="eyebrow">PRIVATE ACCESS · CRYPTO ALPHA</div>
+<h1>Signal begins<br>with access.</h1>
+<p data-i18n="ml0">进入 CRYPTO ALPHA 会员系统。查看会员资格状态、验证记录以及被授权的策略群访问信息。</p>
+<div class="signal" aria-hidden="true">
+<svg viewBox="0 0 600 130" preserveAspectRatio="none"><defs><linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#48dba4" stop-opacity=".12"/><stop offset="1" stop-color="#48dba4" stop-opacity="0"/></linearGradient></defs>
+<path class="signal-grid" d="M0 32.5H600M0 65H600M0 97.5H600M100 0V130M200 0V130M300 0V130M400 0V130M500 0V130"/>
+<path class="signal-area" d="M0 93 L38 88 72 94 108 78 145 82 181 65 219 72 255 50 292 58 328 44 365 52 402 31 440 39 478 26 515 33 552 17 600 23V130H0Z"/>
+<path class="signal-path" d="M0 93 L38 88 72 94 108 78 145 82 181 65 219 72 255 50 292 58 328 44 365 52 402 31 440 39 478 26 515 33 552 17 600 23"/>
+<circle class="signal-dot" cx="600" cy="23" r="3.5"/></svg>
+<div class="signal-meta"><span>SYSTEM <b>ONLINE</b></span><span>ACCESS <b>ENCRYPTED</b></span><span>SESSION <b>SECURE</b></span></div>
+</div>
+</section>
+<section>
+<div class="login">
+<div class="login-head"><div><small>AUTH / MEMBER</small><h2 data-i18n="ml7">登入会员系统</h2></div><div class="secure"><i></i>SECURE</div></div>
+<form id="loginForm">
+<div class="field"><label>邮箱或用户名 <span>ACCOUNT</span></label><div class="input-wrap"><input id="account" autocomplete="username" placeholder="name@example.com" required></div></div>
+<div class="field"><label>密码 <span>PASSWORD</span></label><div class="input-wrap"><input id="password" type="password" autocomplete="current-password" placeholder="输入登录密码" data-i18n-placeholder="ml5" minlength="8" required><button id="eye" class="eye" type="button" aria-label="显示密码">SHOW</button></div></div>
+<div class="row"><label class="remember"><input type="checkbox" data-i18n="ml9">保持登录</label><a class="link" href="#" id="forgot" data-i18n="ml8">忘记密码？</a></div>
+<button class="primary" type="submit">SIGN IN →</button>
+<div id="msg" class="msg" aria-live="polite"></div>
+</form>
+<div class="divider">SECURITY OPTIONS</div>
+<div class="alt"><button type="button" id="twofa">2FA / AUTHENTICATOR</button><button type="button" id="support">CONTACT SUPPORT</button></div>
+<div class="notice"><b data-i18n="ml10">安全提示</b> · CRYPTO ALPHA 登录页面不会要求你的交易所密码、API Key、私钥、助记词或短信验证码。会员系统密码与交易所账户凭证应完全独立。</div>
+</div>
+<div class="member-admin-link">Verification Console <a href="admin-review.html">→</a></div>
+<div class="access">尚未完成会员验证？ <a href="verify.html" data-i18n="ml2">提交交易所 UID →</a></div>
+</section>
+</main>
+<footer><span>CRYPTO ALPHA · MEMBER ACCESS</span><span>AUTHENTICATION ≠ EXCHANGE CREDENTIALS</span></footer>
+</div>
+<script>
+(function(){
+ const form=document.getElementById('loginForm'),pwd=document.getElementById('password'),eye=document.getElementById('eye'),msg=document.getElementById('msg');
+ const params=new URLSearchParams(location.search); const loggedOut=params.get('loggedout')==='1';
+
+ eye.addEventListener('click',()=>{const show=pwd.type==='password';pwd.type=show?'text':'password';eye.textContent=show?'HIDE':'SHOW';eye.setAttribute('aria-label',show?'隐藏密码':'显示密码')});
+ function note(t){msg.textContent=t;msg.classList.add('on')}
+ form.addEventListener('submit',e=>{
+  e.preventDefault();
+  const account=document.getElementById('account').value.trim();
+  const password=document.getElementById('password').value;
+  if(!account||!password||password.length<8){note('请填写有效的账号与至少 8 位密码。');return}
+  try{localStorage.setItem('ca_member_session','active')}catch(err){}
+  note('验证成功 · 正在进入管理员控制台…');
+  setTimeout(()=>{window.location.href='member-center.html'},350);
+});
+ document.getElementById('twofa').onclick=()=>note('2FA 入口已预留。正式系统建议在账号密码验证成功后再要求 Authenticator 动态码。');
+ document.getElementById('support').onclick=()=>note('客服入口已预留，可接入你们正式的 Telegram / QQ 客服流程。');
+ document.getElementById('forgot').onclick=e=>{e.preventDefault();note('密码找回入口已预留。正式系统应使用一次性、短时效的服务器重置链接。')};
+ if(matchMedia('(pointer:fine)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
+   const c=document.querySelector('.cross');let x=-100,y=-100,tx=-100,ty=-100,id;
+   addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY;c.classList.add('on')},{passive:true});
+   addEventListener('mouseleave',()=>c.classList.remove('on'));
+   (function tick(){x+=(tx-x)*.18;y+=(ty-y)*.18;c.style.transform=`translate(${x-37}px,${y-37}px)`;id=requestAnimationFrame(tick)})();
+   addEventListener('pagehide',()=>cancelAnimationFrame(id),{once:true});
+ }
+})();
+</script>
+
+<script>
+(function(){
+ const I18N={"en": {"ml0": "Enter the CRYPTO ALPHA member system to view eligibility status, verification records, and authorized strategy-group access.", "ml1": "Your member-system password must remain completely separate from your exchange credentials.", "ml2": "Submit Exchange UID →", "ml3": "Not verified yet?", "ml4": "Exchange UID", "ml5": "Enter password", "ml6": "Email or Username", "ml7": "Sign in to Member System", "ml8": "Forgot password?", "ml9": "Keep me signed in", "ml10": "Security Notice", "ml11": "Exchange", "ml12": "Password"}, "zh": {"ml0": "进入 CRYPTO ALPHA 会员系统。查看会员资格状态、验证记录以及被授权的策略群访问信息。", "ml1": "会员系统密码与交易所账户凭证应完全独立。", "ml2": "提交交易所 UID →", "ml3": "尚未完成会员验证？", "ml4": "交易所 UID", "ml5": "输入登录密码", "ml6": "邮箱或用户名", "ml7": "登入会员系统", "ml8": "忘记密码？", "ml9": "保持登录", "ml10": "安全提示", "ml11": "交易所", "ml12": "密码"}, "zh-TW": {"ml0": "进入 CRYPTO ALPHA 会员系统。查看会员资格状态、验证记录以及被授权的策略群访问信息。", "ml1": "会员系统密码与交易所账户凭证应完全独立。", "ml2": "提交交易所 UID →", "ml3": "尚未完成會員驗證？", "ml4": "交易所 UID", "ml5": "輸入登入密碼", "ml6": "電子郵件或使用者名稱", "ml7": "登入會員系統", "ml8": "忘記密碼？", "ml9": "保持登入", "ml10": "安全提示", "ml11": "交易所", "ml12": "密碼"}, "ja": {"ml0": "进入 CRYPTO ALPHA 会员系统。查看会员资格状态、验证记录以及被授权的策略群访问信息。", "ml1": "会员系统密码与交易所账户凭证应完全独立。", "ml2": "取引所 UID を送信 →", "ml3": "会員認証がまだですか？", "ml4": "取引所 UID", "ml5": "パスワードを入力", "ml6": "メールまたはユーザー名", "ml7": "会員システムにログイン", "ml8": "パスワードを忘れた場合", "ml9": "ログイン状態を保持", "ml10": "安全提示", "ml11": "取引所", "ml12": "パスワード"}, "ko": {"ml0": "进入 CRYPTO ALPHA 会员系统。查看会员资格状态、验证记录以及被授权的策略群访问信息。", "ml1": "会员系统密码与交易所账户凭证应完全独立。", "ml2": "거래소 UID 제출 →", "ml3": "회원 인증이 아직인가요?", "ml4": "거래소 UID", "ml5": "비밀번호 입력", "ml6": "이메일 또는 사용자 이름", "ml7": "회원 시스템 로그인", "ml8": "비밀번호 찾기", "ml9": "로그인 유지", "ml10": "安全提示", "ml11": "거래소", "ml12": "비밀번호"}, "es": {"ml0": "进入 CRYPTO ALPHA 会员系统。查看会员资格状态、验证记录以及被授权的策略群访问信息。", "ml1": "会员系统密码与交易所账户凭证应完全独立。", "ml2": "Enviar UID →", "ml3": "¿Aún no estás verificado?", "ml4": "UID del exchange", "ml5": "Introduce la contraseña", "ml6": "Correo o usuario", "ml7": "Acceso de miembros", "ml8": "¿Olvidaste la contraseña?", "ml9": "Mantener sesión", "ml10": "安全提示", "ml11": "Exchange", "ml12": "Contraseña"}, "fr": {"ml0": "进入 CRYPTO ALPHA 会员系统。查看会员资格状态、验证记录以及被授权的策略群访问信息。", "ml1": "会员系统密码与交易所账户凭证应完全独立。", "ml2": "Envoyer l’UID →", "ml3": "Pas encore vérifié ?", "ml4": "UID de la plateforme", "ml5": "Saisissez le mot de passe", "ml6": "E-mail ou nom d’utilisateur", "ml7": "Connexion membre", "ml8": "Mot de passe oublié ?", "ml9": "Rester connecté", "ml10": "安全提示", "ml11": "Plateforme", "ml12": "Mot de passe"}, "de": {"ml0": "进入 CRYPTO ALPHA 会员系统。查看会员资格状态、验证记录以及被授权的策略群访问信息。", "ml1": "会员系统密码与交易所账户凭证应完全独立。", "ml2": "Börsen-UID einreichen →", "ml3": "Noch nicht verifiziert?", "ml4": "Börsen-UID", "ml5": "Passwort eingeben", "ml6": "E-Mail oder Benutzername", "ml7": "Mitgliedersystem anmelden", "ml8": "Passwort vergessen?", "ml9": "Angemeldet bleiben", "ml10": "安全提示", "ml11": "Börse", "ml12": "Passwort"}};
+ const supported=["en", "zh", "zh-TW", "ja", "ko", "es", "fr", "de"];
+ function autoLang(){
+   const n=(navigator.language||'en').toLowerCase();
+   if(n.startsWith('zh-tw')||n.startsWith('zh-hk')||n.includes('hant'))return 'zh-TW';
+   if(n.startsWith('zh'))return 'zh';
+   for(const l of ['ja','ko','es','fr','de'])if(n.startsWith(l))return l;
+   return 'en';
+ }
+ function apply(lang){
+   if(!supported.includes(lang))lang='en';
+   document.documentElement.lang=lang;
+   document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(I18N[lang]&&I18N[lang][k]!=null)el.textContent=I18N[lang][k]});
+   document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{const k=el.dataset.i18nPlaceholder;if(I18N[lang]&&I18N[lang][k]!=null)el.placeholder=I18N[lang][k]});
+   const s=document.getElementById('langSelect');if(s)s.value=lang;
+   localStorage.setItem('qa-lang',lang);
+ }
+ const select=document.getElementById('langSelect');
+ const initial=localStorage.getItem('qa-lang')||autoLang();
+ if(select)select.addEventListener('change',()=>apply(select.value));
+ apply(initial);
+})();
+</script>
+<script>
+(function(){
+ const REF={"en": {"label": "Referral Source", "required": "REQUIRED", "select": "Select source", "otherPlaceholder": "Other source / channel name", "other": "Other"}, "zh": {"label": "来源渠道", "required": "必填", "select": "请选择来源", "otherPlaceholder": "其他来源 / 渠道名称", "other": "其他"}, "zh-TW": {"label": "來源渠道", "required": "必填", "select": "請選擇來源", "otherPlaceholder": "其他來源 / 渠道名稱", "other": "其他"}, "ja": {"label": "流入元", "required": "必須", "select": "流入元を選択", "otherPlaceholder": "その他の流入元 / チャンネル名", "other": "その他"}, "ko": {"label": "유입 경로", "required": "필수", "select": "유입 경로 선택", "otherPlaceholder": "기타 유입 경로 / 채널명", "other": "기타"}, "es": {"label": "Fuente de referencia", "required": "OBLIGATORIO", "select": "Seleccionar fuente", "otherPlaceholder": "Otra fuente / canal", "other": "Otro"}, "fr": {"label": "Source de provenance", "required": "REQUIS", "select": "Sélectionner la source", "otherPlaceholder": "Autre source / canal", "other": "Autre"}, "de": {"label": "Herkunftsquelle", "required": "ERFORDERLICH", "select": "Quelle auswählen", "otherPlaceholder": "Andere Quelle / Kanal", "other": "Andere"}};
+ function applyReferral(){
+   const s=document.getElementById('langSelect'); if(!s)return;
+   const lang=s.value||localStorage.getItem('qa-lang')||'en', d=REF[lang]||REF.en;
+   const q=x=>document.querySelector(x);
+   if(q('[data-ref-label]'))q('[data-ref-label]').textContent=d.label;
+   if(q('[data-ref-required]'))q('[data-ref-required]').textContent=d.required;
+   if(q('[data-ref-select]'))q('[data-ref-select]').textContent=d.select;
+   if(q('[data-ref-other]'))q('[data-ref-other]').textContent=d.other;
+   if(q('[data-ref-other-placeholder]'))q('[data-ref-other-placeholder]').placeholder=d.otherPlaceholder;
+ }
+ const s=document.getElementById('langSelect');
+ if(s){s.addEventListener('change',()=>setTimeout(applyReferral,0));applyReferral()}
+})();
+</script>
+<script id="qa-full-i18n-patch">
+(function(){
+const MAP={"会员资格验证": {"en": "Membership Verification", "zh-TW": "會員資格驗證", "ja": "会員資格認証", "ko": "회원 자격 인증", "es": "Verificación de membresía", "fr": "Vérification d’adhésion", "de": "Mitgliedschaft verifizieren"}, "提交交易所 UID，登记你的社交账号，完成 CRYPTO ALPHA 会员资格审核。": {"en": "Submit your exchange UID and social account to complete CRYPTO ALPHA membership review.", "zh-TW": "提交交易所 UID，登記你的社交帳號，完成 CRYPTO ALPHA 會員資格審核。", "ja": "取引所 UID とソーシャルアカウントを登録し、CRYPTO ALPHA 会員資格審査を完了します。", "ko": "거래소 UID와 소셜 계정을 등록하여 CRYPTO ALPHA 회원 자격 심사를 완료하세요.", "es": "Envía tu UID del exchange y tu cuenta social para completar la revisión de membresía de CRYPTO ALPHA.", "fr": "Envoyez votre UID de plateforme et votre compte social pour terminer l’examen d’adhésion CRYPTO ALPHA.", "de": "Reiche deine Börsen-UID und dein Social-Konto ein, um die CRYPTO ALPHA-Mitgliedschaftsprüfung abzuschließen."}, "交易所": {"en": "Exchange", "zh-TW": "交易所", "ja": "取引所", "ko": "거래소", "es": "Exchange", "fr": "Plateforme", "de": "Börse"}, "请选择": {"en": "Select", "zh-TW": "請選擇", "ja": "選択", "ko": "선택", "es": "Seleccionar", "fr": "Sélectionner", "de": "Auswählen"}, "其他交易所": {"en": "Other exchange", "zh-TW": "其他交易所", "ja": "その他の取引所", "ko": "기타 거래소", "es": "Otro exchange", "fr": "Autre plateforme", "de": "Andere Börse"}, "交易所 UID": {"en": "Exchange UID", "zh-TW": "交易所 UID", "ja": "取引所 UID", "ko": "거래소 UID", "es": "UID del exchange", "fr": "UID de la plateforme", "de": "Börsen-UID"}, "输入交易所 UID": {"en": "Enter exchange UID", "zh-TW": "輸入交易所 UID", "ja": "取引所 UID を入力", "ko": "거래소 UID 입력", "es": "Introduce el UID del exchange", "fr": "Saisissez l’UID de la plateforme", "de": "Börsen-UID eingeben"}, "只填写 UID，不要填写邮箱、手机号或登录凭证。": {"en": "Enter the UID only. Do not enter email, phone number, or login credentials.", "zh-TW": "只填寫 UID，請勿填寫電子郵件、手機號碼或登入憑證。", "ja": "UID のみ入力してください。メール、電話番号、ログイン情報は入力しないでください。", "ko": "UID만 입력하세요. 이메일, 전화번호 또는 로그인 정보를 입력하지 마세요.", "es": "Introduce solo el UID. No introduzcas correo, teléfono ni credenciales de acceso.", "fr": "Saisissez uniquement l’UID. N’indiquez ni e-mail, ni téléphone, ni identifiants de connexion.", "de": "Nur die UID eingeben. Keine E-Mail, Telefonnummer oder Zugangsdaten angeben."}, "社交账号 ID": {"en": "Social Account ID", "zh-TW": "社交帳號 ID", "ja": "ソーシャルアカウント ID", "ko": "소셜 계정 ID", "es": "ID de cuenta social", "fr": "Identifiant social", "de": "Social-Account-ID"}, "至少一个": {"en": "At least one", "zh-TW": "至少一個", "ja": "最低1つ", "ko": "최소 1개", "es": "Al menos uno", "fr": "Au moins un", "de": "Mindestens eins"}, "QQ 号 / ID": {"en": "QQ Number / ID", "zh-TW": "QQ 號 / ID", "ja": "QQ 番号 / ID", "ko": "QQ 번호 / ID", "es": "Número / ID de QQ", "fr": "Numéro / ID QQ", "de": "QQ-Nummer / ID"}, "来源渠道": {"en": "Referral Source", "zh-TW": "來源渠道", "ja": "流入元", "ko": "유입 경로", "es": "Fuente de referencia", "fr": "Source de provenance", "de": "Herkunftsquelle"}, "选填": {"en": "OPTIONAL", "zh-TW": "選填", "ja": "任意", "ko": "선택", "es": "OPCIONAL", "fr": "FACULTATIF", "de": "OPTIONAL"}, "哔哩哔哩": {"en": "Bilibili", "zh-TW": "Bilibili", "ja": "Bilibili", "ko": "Bilibili", "es": "Bilibili", "fr": "Bilibili", "de": "Bilibili"}, "币安广场": {"en": "Binance Square", "zh-TW": "幣安廣場", "ja": "Binance Square", "ko": "Binance Square", "es": "Binance Square", "fr": "Binance Square", "de": "Binance Square"}, "其他": {"en": "Other", "zh-TW": "其他", "ja": "その他", "ko": "기타", "es": "Otro", "fr": "Autre", "de": "Andere"}, "其他来源 / 渠道": {"en": "Other source / channel", "zh-TW": "其他來源 / 渠道", "ja": "その他の流入元 / チャンネル", "ko": "기타 유입 경로 / 채널", "es": "Otra fuente / canal", "fr": "Autre source / canal", "de": "Andere Quelle / Kanal"}, "如有来源渠道，可选择一个标签。": {"en": "If applicable, select one referral source.", "zh-TW": "如有來源渠道，可選擇一個標籤。", "ja": "該当する場合は流入元を1つ選択してください。", "ko": "해당되는 경우 유입 경로 태그를 하나 선택하세요.", "es": "Si corresponde, selecciona una fuente.", "fr": "Le cas échéant, sélectionnez une source.", "de": "Wähle bei Bedarf eine Quelle aus."}, "安全提醒": {"en": "Security Notice", "zh-TW": "安全提醒", "ja": "セキュリティ注意事項", "ko": "보안 안내", "es": "Aviso de seguridad", "fr": "Avis de sécurité", "de": "Sicherheitshinweis"}, "会员验证绝不需要交易所密码、短信/邮箱验证码、API Key、Secret Key、私钥或助记词。请勿提交这些信息。": {"en": "Membership verification never requires an exchange password, SMS/email code, API Key, Secret Key, private key, or seed phrase. Never submit them.", "zh-TW": "會員驗證絕不需要交易所密碼、簡訊/郵件驗證碼、API Key、Secret Key、私鑰或助記詞。請勿提交這些資訊。", "ja": "会員認証で取引所パスワード、SMS/メール認証コード、API Key、Secret Key、秘密鍵、シードフレーズを求めることはありません。送信しないでください。", "ko": "회원 인증에는 거래소 비밀번호, SMS/이메일 인증 코드, API Key, Secret Key, 개인 키 또는 시드 문구가 필요하지 않습니다. 제출하지 마세요.", "es": "La verificación nunca requiere contraseña del exchange, código SMS/correo, API Key, Secret Key, clave privada ni frase semilla. No los envíes.", "fr": "La vérification ne demande jamais le mot de passe de la plateforme, un code SMS/e-mail, API Key, Secret Key, clé privée ou phrase de récupération. Ne les envoyez pas.", "de": "Die Verifizierung verlangt niemals Börsenpasswort, SMS/E-Mail-Code, API Key, Secret Key, privaten Schlüssel oder Seed-Phrase. Nicht übermitteln."}, "我确认 UID 与社交账号信息属于本人，并同意用于会员资格审核及群组邀请联系。": {"en": "I confirm that the UID and social account information belong to me and may be used for membership review and group invitation contact.", "zh-TW": "我確認 UID 與社交帳號資訊屬於本人，並同意用於會員資格審核及群組邀請聯絡。", "ja": "UID とソーシャルアカウント情報が本人のものであり、会員資格審査およびグループ招待の連絡に使用されることに同意します。", "ko": "UID와 소셜 계정 정보가 본인 소유임을 확인하며 회원 자격 심사 및 그룹 초대 연락에 사용하는 데 동의합니다.", "es": "Confirmo que el UID y las cuentas sociales me pertenecen y acepto su uso para la revisión y el contacto de invitación al grupo.", "fr": "Je confirme que l’UID et les comptes sociaux m’appartiennent et j’accepte leur utilisation pour l’examen et l’invitation au groupe.", "de": "Ich bestätige, dass UID und Social-Konten mir gehören, und stimme der Nutzung für Prüfung und Gruppeneinladung zu."}, "提交会员验证": {"en": "Submit Verification", "zh-TW": "提交會員驗證", "ja": "会員認証を送信", "ko": "회원 인증 제출", "es": "Enviar verificación", "fr": "Envoyer la vérification", "de": "Verifizierung einreichen"}, "验证流程": {"en": "Verification Flow", "zh-TW": "驗證流程", "ja": "認証フロー", "ko": "인증 절차", "es": "Proceso de verificación", "fr": "Processus de vérification", "de": "Verifizierungsablauf"}, "提交 UID": {"en": "Submit UID", "zh-TW": "提交 UID", "ja": "UID を送信", "ko": "UID 제출", "es": "Enviar UID", "fr": "Envoyer l’UID", "de": "UID einreichen"}, "选择交易所并填写对应 UID。": {"en": "Choose an exchange and enter its UID.", "zh-TW": "選擇交易所並填寫對應 UID。", "ja": "取引所を選択し、対応する UID を入力します。", "ko": "거래소를 선택하고 해당 UID를 입력하세요.", "es": "Elige un exchange e introduce su UID.", "fr": "Choisissez une plateforme et saisissez son UID.", "de": "Börse auswählen und die zugehörige UID eingeben."}, "身份匹配": {"en": "Identity Match", "zh-TW": "身份匹配", "ja": "本人情報の照合", "ko": "신원 매칭", "es": "Verificar identidad", "fr": "Vérifier l’identité", "de": "Identität abgleichen"}, "QQ 或 Telegram 至少登记一个账号。": {"en": "Provide at least one QQ or Telegram account.", "zh-TW": "QQ 或 Telegram 至少登記一個帳號。", "ja": "QQ または Telegram を最低1つ登録します。", "ko": "QQ 또는 Telegram 계정을 최소 하나 등록하세요.", "es": "Registra al menos una cuenta de QQ o Telegram.", "fr": "Enregistrez au moins un compte QQ ou Telegram.", "de": "Mindestens ein QQ- oder Telegram-Konto angeben."}, "人工审核": {"en": "Manual Review", "zh-TW": "人工審核", "ja": "手動審査", "ko": "수동 심사", "es": "Revisión manual", "fr": "Examen manuel", "de": "Manuelle Prüfung"}, "团队后台核对会员资格并记录审核状态。": {"en": "Our team reviews eligibility and records the review status.", "zh-TW": "團隊後台核對會員資格並記錄審核狀態。", "ja": "チームが会員資格を確認し、審査状況を記録します。", "ko": "팀이 회원 자격을 확인하고 심사 상태를 기록합니다.", "es": "El equipo revisa la elegibilidad y registra el estado.", "fr": "L’équipe vérifie l’éligibilité et enregistre le statut.", "de": "Das Team prüft die Berechtigung und erfasst den Status."}, "进入会员群": {"en": "Join Member Group", "zh-TW": "進入會員群", "ja": "会員グループへ", "ko": "회원 그룹 입장", "es": "Entrar al grupo", "fr": "Rejoindre le groupe", "de": "Mitgliedergruppe beitreten"}, "通过后协助加入对应会员群，获取机器开单策略点位等会员内容。": {"en": "After approval, we help you join the corresponding member group for machine-generated trade entry levels and other member content.", "zh-TW": "通過後協助加入對應會員群，取得機器開單策略點位等會員內容。", "ja": "承認後、対応する会員グループへの参加を案内し、機械生成のエントリーポイント等の会員コンテンツを提供します。", "ko": "승인 후 해당 회원 그룹 가입을 안내하고 기계 생성 진입 전략 포인트 등 회원 콘텐츠를 제공합니다.", "es": "Tras la aprobación, te ayudamos a entrar al grupo correspondiente para acceder a niveles de entrada generados por el sistema y otros contenidos.", "fr": "Après approbation, nous vous aidons à rejoindre le groupe correspondant pour accéder aux niveaux d’entrée générés par le système et aux contenus membres.", "de": "Nach Genehmigung helfen wir beim Beitritt zur passenden Gruppe mit systemgenerierten Einstiegspunkten und weiteren Mitgliederinhalten."}, "请至少填写一个 QQ 或 Telegram 账号 ID。": {"en": "Please provide at least one QQ or Telegram account ID.", "zh-TW": "請至少填寫一個 QQ 或 Telegram 帳號 ID。", "ja": "QQ または Telegram のアカウント ID を最低1つ入力してください。", "ko": "QQ 또는 Telegram 계정 ID를 최소 하나 입력하세요.", "es": "Indica al menos un ID de QQ o Telegram.", "fr": "Indiquez au moins un identifiant QQ ou Telegram.", "de": "Bitte mindestens eine QQ- oder Telegram-ID angeben."}, "提交成功 · PENDING REVIEW": {"en": "Submitted · PENDING REVIEW", "zh-TW": "提交成功 · 等待審核", "ja": "送信完了 · 審査待ち", "ko": "제출 완료 · 심사 대기", "es": "Enviado · PENDIENTE DE REVISIÓN", "fr": "Envoyé · EN ATTENTE D’EXAMEN", "de": "Eingereicht · PRÜFUNG AUSSTEHEND"}, "申请编号：": {"en": "Application ID: ", "zh-TW": "申請編號：", "ja": "申請番号：", "ko": "신청 번호: ", "es": "ID de solicitud: ", "fr": "ID de demande : ", "de": "Antrags-ID: "}, "会员审核后台": {"en": "Membership Review", "zh-TW": "會員審核後台", "ja": "会員審査管理", "ko": "회원 심사 관리", "es": "Revisión de membresía", "fr": "Examen des adhésions", "de": "Mitgliedschaftsprüfung"}, "交易所 UID 与会员社交身份审核工作台。": {"en": "Review workspace for exchange UIDs and member social identities.", "zh-TW": "交易所 UID 與會員社交身份審核工作台。", "ja": "取引所 UID と会員ソーシャル情報の審査ワークスペース。", "ko": "거래소 UID 및 회원 소셜 신원 심사 작업 공간.", "es": "Espacio de revisión de UID y perfiles sociales de miembros.", "fr": "Espace d’examen des UID et identités sociales des membres.", "de": "Arbeitsbereich zur Prüfung von Börsen-UIDs und Social-Identitäten."}, "全部状态": {"en": "All Statuses", "zh-TW": "全部狀態", "ja": "すべて", "ko": "전체 상태", "es": "Todos los estados", "fr": "Tous les statuts", "de": "Alle Status"}, "待审核": {"en": "Pending", "zh-TW": "待審核", "ja": "審査待ち", "ko": "심사 대기", "es": "Pendiente", "fr": "En attente", "de": "Ausstehend"}, "已通过": {"en": "Approved", "zh-TW": "已通過", "ja": "承認済み", "ko": "승인됨", "es": "Aprobado", "fr": "Approuvé", "de": "Genehmigt"}, "待补资料": {"en": "Need Info", "zh-TW": "待補資料", "ja": "追加情報待ち", "ko": "추가 정보 필요", "es": "Falta información", "fr": "Informations requises", "de": "Weitere Angaben"}, "已拒绝": {"en": "Rejected", "zh-TW": "已拒絕", "ja": "却下", "ko": "거절됨", "es": "Rechazado", "fr": "Refusé", "de": "Abgelehnt"}, "搜索 UID / QQ / Telegram": {"en": "Search UID / QQ / Telegram", "zh-TW": "搜尋 UID / QQ / Telegram", "ja": "UID / QQ / Telegram を検索", "ko": "UID / QQ / Telegram 검색", "es": "Buscar UID / QQ / Telegram", "fr": "Rechercher UID / QQ / Telegram", "de": "UID / QQ / Telegram suchen"}, "暂无申请": {"en": "No applications", "zh-TW": "暫無申請", "ja": "申請はありません", "ko": "신청 없음", "es": "No hay solicitudes", "fr": "Aucune demande", "de": "Keine Anträge"}, "审核申请": {"en": "Review Application", "zh-TW": "審核申請", "ja": "申請を審査", "ko": "신청 심사", "es": "Revisar solicitud", "fr": "Examiner la demande", "de": "Antrag prüfen"}, "邀请群组": {"en": "Invitation Group", "zh-TW": "邀請群組", "ja": "招待グループ", "ko": "초대 그룹", "es": "Grupo de invitación", "fr": "Groupe d’invitation", "de": "Einladungsgruppe"}, "暂不指定": {"en": "Not assigned", "zh-TW": "暫不指定", "ja": "未指定", "ko": "미지정", "es": "Sin asignar", "fr": "Non attribué", "de": "Nicht zugewiesen"}, "QQ 会员群": {"en": "QQ Member Group", "zh-TW": "QQ 會員群", "ja": "QQ 会員グループ", "ko": "QQ 회원 그룹", "es": "Grupo de miembros QQ", "fr": "Groupe membre QQ", "de": "QQ-Mitgliedergruppe"}, "Telegram 会员群": {"en": "Telegram Member Group", "zh-TW": "Telegram 會員群", "ja": "Telegram 会員グループ", "ko": "Telegram 회원 그룹", "es": "Grupo de miembros Telegram", "fr": "Groupe membre Telegram", "de": "Telegram-Mitgliedergruppe"}, "QQ + Telegram": {"en": "QQ + Telegram", "zh-TW": "QQ + Telegram", "ja": "QQ + Telegram", "ko": "QQ + Telegram", "es": "QQ + Telegram", "fr": "QQ + Telegram", "de": "QQ + Telegram"}, "审核备注": {"en": "Review Notes", "zh-TW": "審核備註", "ja": "審査メモ", "ko": "심사 메모", "es": "Notas de revisión", "fr": "Notes d’examen", "de": "Prüfnotiz"}, "填写内部审核备注": {"en": "Internal review notes", "zh-TW": "填寫內部審核備註", "ja": "内部審査メモを入力", "ko": "내부 심사 메모 입력", "es": "Notas internas de revisión", "fr": "Notes internes d’examen", "de": "Interne Prüfnotiz"}, "拒绝": {"en": "Reject", "zh-TW": "拒絕", "ja": "却下", "ko": "거절", "es": "Rechazar", "fr": "Refuser", "de": "Ablehnen"}, "通过": {"en": "Approve", "zh-TW": "通過", "ja": "承認", "ko": "승인", "es": "Aprobar", "fr": "Approuver", "de": "Genehmigen"}, "关闭": {"en": "Close", "zh-TW": "關閉", "ja": "閉じる", "ko": "닫기", "es": "Cerrar", "fr": "Fermer", "de": "Schließen"}, "登入会员系统": {"en": "Sign in to Member System", "zh-TW": "登入會員系統", "ja": "会員システムにログイン", "ko": "회원 시스템 로그인", "es": "Acceso de miembros", "fr": "Connexion membre", "de": "Mitgliedersystem anmelden"}, "进入 CRYPTO ALPHA 会员系统。查看会员资格状态、验证记录以及被授权的策略群访问信息。": {"en": "Enter the CRYPTO ALPHA member system to view eligibility status, verification records, and authorized strategy-group access.", "zh-TW": "進入 CRYPTO ALPHA 會員系統。查看會員資格狀態、驗證記錄以及獲授權的策略群存取資訊。", "ja": "CRYPTO ALPHA 会員システムで、会員資格、認証履歴、許可された戦略グループへのアクセスを確認できます。", "ko": "CRYPTO ALPHA 회원 시스템에서 자격 상태, 인증 기록 및 승인된 전략 그룹 접근 정보를 확인하세요.", "es": "Accede al sistema de miembros CRYPTO ALPHA para consultar el estado, los registros de verificación y el acceso autorizado a grupos de estrategia.", "fr": "Accédez au système membre CRYPTO ALPHA pour consulter le statut, les vérifications et les accès autorisés aux groupes de stratégie.", "de": "Im CRYPTO ALPHA-Mitgliedersystem kannst du Status, Verifizierungen und autorisierte Strategiegruppen-Zugänge einsehen."}, "邮箱或用户名": {"en": "Email or Username", "zh-TW": "電子郵件或使用者名稱", "ja": "メールまたはユーザー名", "ko": "이메일 또는 사용자 이름", "es": "Correo o usuario", "fr": "E-mail ou nom d’utilisateur", "de": "E-Mail oder Benutzername"}, "密码": {"en": "Password", "zh-TW": "密碼", "ja": "パスワード", "ko": "비밀번호", "es": "Contraseña", "fr": "Mot de passe", "de": "Passwort"}, "输入登录密码": {"en": "Enter password", "zh-TW": "輸入登入密碼", "ja": "パスワードを入力", "ko": "비밀번호 입력", "es": "Introduce la contraseña", "fr": "Saisissez le mot de passe", "de": "Passwort eingeben"}, "保持登录": {"en": "Keep me signed in", "zh-TW": "保持登入", "ja": "ログイン状態を保持", "ko": "로그인 유지", "es": "Mantener sesión", "fr": "Rester connecté", "de": "Angemeldet bleiben"}, "忘记密码？": {"en": "Forgot password?", "zh-TW": "忘記密碼？", "ja": "パスワードを忘れた場合", "ko": "비밀번호 찾기", "es": "¿Olvidaste la contraseña?", "fr": "Mot de passe oublié ?", "de": "Passwort vergessen?"}, "尚未完成会员验证？": {"en": "Not verified yet?", "zh-TW": "尚未完成會員驗證？", "ja": "会員認証がまだですか？", "ko": "회원 인증이 아직인가요?", "es": "¿Aún no estás verificado?", "fr": "Pas encore vérifié ?", "de": "Noch nicht verifiziert?"}, "提交交易所 UID →": {"en": "Submit Exchange UID →", "zh-TW": "提交交易所 UID →", "ja": "取引所 UID を送信 →", "ko": "거래소 UID 제출 →", "es": "Enviar UID →", "fr": "Envoyer l’UID →", "de": "Börsen-UID einreichen →"}, "会员系统密码与交易所账户凭证应完全独立。": {"en": "Your member-system password must remain completely separate from your exchange credentials.", "zh-TW": "會員系統密碼與交易所帳戶憑證應完全獨立。", "ja": "会員システムのパスワードは取引所の認証情報と完全に分けてください。", "ko": "회원 시스템 비밀번호는 거래소 계정 자격 증명과 완전히 분리해야 합니다.", "es": "La contraseña del sistema de miembros debe ser totalmente independiente de las credenciales del exchange.", "fr": "Le mot de passe du système membre doit être totalement distinct des identifiants de la plateforme.", "de": "Das Passwort des Mitgliedersystems muss vollständig von den Börsen-Zugangsdaten getrennt sein."}, "登录接口尚未连接服务器。": {"en": "The login API is not connected to a server yet.", "zh-TW": "登入介面尚未連接伺服器。", "ja": "ログイン API はまだサーバーに接続されていません。", "ko": "로그인 API가 아직 서버에 연결되지 않았습니다.", "es": "La API de acceso aún no está conectada al servidor.", "fr": "L’API de connexion n’est pas encore reliée au serveur.", "de": "Die Login-API ist noch nicht mit dem Server verbunden."}};
+const LANGS=["en", "zh", "zh-TW", "ja", "ko", "es", "fr", "de"];
+function lang(){const s=document.getElementById('langSelect');return (s&&s.value)||localStorage.getItem('qa-lang')||'en'}
+function trText(str,l){
+ if(l==='zh') return str;
+ let out=str;
+ const entries=Object.entries(MAP).sort((a,b)=>b[0].length-a[0].length);
+ for(const [zh,d] of entries){ if(d[l]) out=out.split(zh).join(d[l]); }
+ return out;
+}
+function walk(l){
+ const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+ let n; const nodes=[];
+ while(n=w.nextNode()){ if(n.parentElement && !['SCRIPT','STYLE'].includes(n.parentElement.tagName) && /[\u3400-\u9fff]/.test(n.nodeValue)) nodes.push(n); }
+ nodes.forEach(n=>{ if(!n.__qaZh)n.__qaZh=n.nodeValue; n.nodeValue=trText(n.__qaZh,l); });
+ document.querySelectorAll('[placeholder],[title],[aria-label]').forEach(el=>{
+  for(const a of ['placeholder','title','aria-label']){
+   if(!el.hasAttribute(a))continue;
+   const k='qaOrig'+a.replace('-','');
+   if(!el.dataset[k]) el.dataset[k]=el.getAttribute(a);
+   el.setAttribute(a,trText(el.dataset[k],l));
+  }
+ });
+}
+function apply(){setTimeout(()=>walk(lang()),0)}
+const s=document.getElementById('langSelect'); if(s)s.addEventListener('change',apply);
+new MutationObserver(()=>walk(lang())).observe(document.body,{childList:true,subtree:true});
+apply();
+})();
+</script>
+
+<script id="login-loop-message">
+(function(){
+  const params=new URLSearchParams(location.search),msg=document.getElementById('msg');
+  if(params.get('loggedout')==='1'&&msg){msg.textContent='会员登录会话已退出。';msg.classList.add('on')}
+  const form=document.getElementById('loginForm');
+  if(form&&params.get('next')==='admin'){
+    const m=form.querySelector('.field');
+    if(m && msg && !params.get('loggedout')){msg.textContent='请先登录会员账号。';msg.classList.add('on')}
+  }
+})();
+</script>
+</body></html>
